@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumChain — Simulador</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('qc-theme')||'dark');</script>
+</head>
+<body>
+
+<nav>
+  <div class="logo">⚛ QuantumChain</div>
+  <div class="nav-links">
+    <a href="#sim" class="on">Simulador</a>
+    <a href="#chain">Blockchain</a>
+    <a href="#crypto">🔐 Criptografia</a>
+    <a href="examples.html">Exemplos</a>
+  </div>
+  <a href="info.html" class="nav-back" style="border-color:var(--q);color:var(--q)!important">📚 Informações Técnicas →</a>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker"></div>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="padding:2.2rem 2rem 1.8rem">
+  <canvas id="hc"></canvas>
+  <div class="hi">
+    <div class="badge">Simulador Interativo · Educacional</div>
+    <h1>Transações Bancárias via<br><em>Computação Quântica</em> + Blockchain</h1>
+    <p class="hs">Simule em tempo real como bancos transmitem valores de forma segura usando criptografia quântica, QKD e registro imutável em blockchain.</p>
+    <div class="stats">
+      <div class="sc"><div class="sv">93%</div><div class="sl">Bancos Centrais c/ CBDC</div></div>
+      <div class="sc"><div class="sv">USD 6,3 bi</div><div class="sl">Mercado blockchain 2024</div></div>
+      <div class="sc"><div class="sv">256-bit</div><div class="sl">Chave QRNG gerada</div></div>
+      <div class="sc"><div class="sv">&lt;12s</div><div class="sl">Finalidade blockchain</div></div>
+      <div class="sc"><div class="sv">4.400+</div><div class="sl">Qubits D-Wave Adv2</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSACTION SIMULATOR -->
+<section id="sim">
+<div class="cnt">
+  <div class="sh">
+    <h2>⚡ Simulador de <em>Transação Bancária Quântica</em></h2>
+    <p>Configure remetente, destinatário, valor em qualquer moeda e método de transmissão. O simulador executa cada etapa com log detalhado e converte o valor na entrega.</p>
+  </div>
+  <div class="sim-grid">
+
+    <!-- FORM -->
+    <div class="card">
+      <div class="fr">
+        <label>🏦 Banco Remetente</label>
+        <select id="s-sender">
+          <optgroup label="🇧🇷 Brasil">
+            <option>Banco do Brasil</option><option>Caixa Econômica Federal</option>
+            <option>Itaú Unibanco</option><option>Bradesco</option>
+            <option>Santander Brasil</option><option>BTG Pactual</option>
+            <option>Nubank</option><option>XP Investimentos</option>
+            <option>Banco Inter</option><option>Sicredi</option>
+            <option>Banco Safra</option><option>Banco Central do Brasil (BACEN)</option>
+          </optgroup>
+          <optgroup label="🌎 América">
+            <option>JPMorgan Chase (Onyx)</option><option>Goldman Sachs</option>
+            <option>Wells Fargo</option><option>Bank of America</option>
+            <option>Citibank</option><option>Federal Reserve (NY Fed)</option>
+          </optgroup>
+          <optgroup label="🌍 Europa">
+            <option>Deutsche Bank</option><option>BNP Paribas</option>
+            <option>BBVA</option><option>Barclays</option><option>HSBC</option>
+            <option>Banco Central Europeu (ECB)</option><option>Bank of England</option>
+            <option>Banco Nacional da Dinamarca</option>
+          </optgroup>
+          <optgroup label="🌏 Ásia / Internacional">
+            <option>Bank of China</option><option>ICBC</option>
+            <option>Mizuho Bank</option><option>DBS Bank (Singapura)</option>
+            <option>BIS (Bank for International Settlements)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="fr">
+        <label>💰 Valor e Moeda de Origem</label>
+        <div class="dual">
+          <input type="number" id="s-amount" value="1000000" min="1" oninput="updConv()">
+          <select id="s-cur" onchange="updConv()">
+            <option value="USD" selected>$ USD</option><option value="BRL">R$ BRL</option>
+            <option value="EUR">€ EUR</option><option value="CNY">¥ CNY</option>
+            <option value="GBP">£ GBP</option><option value="JPY">¥ JPY</option>
+            <option value="CHF">Fr CHF</option><option value="ARS">$ ARS</option>
+            <option value="CAD">C$ CAD</option><option value="AUD">A$ AUD</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fr">
+        <label>🏦 Banco Destinatário</label>
+        <select id="s-receiver">
+          <optgroup label="🇧🇷 Brasil">
+            <option>Banco Central do Brasil (BACEN)</option><option>Banco do Brasil</option>
+            <option>Caixa Econômica Federal</option><option>Itaú Unibanco</option>
+            <option>Bradesco</option><option>BTG Pactual</option>
+            <option>Nubank</option><option>Banco Inter</option>
+          </optgroup>
+          <optgroup label="🌎 América">
+            <option>Federal Reserve (NY Fed)</option><option>JPMorgan Chase (Onyx)</option>
+            <option>Goldman Sachs</option><option>Wells Fargo</option><option>Citibank</option>
+          </optgroup>
+          <optgroup label="🌍 Europa">
+            <option>Banco Central Europeu (ECB)</option><option>Deutsche Bank</option>
+            <option>BBVA</option><option>HSBC</option><option>Barclays</option>
+            <option>Bank of England</option><option>Banco Nacional da Dinamarca</option>
+          </optgroup>
+          <optgroup label="🌏 Ásia / Internacional">
+            <option>BIS (Bank for International Settlements)</option><option>Bank of China</option>
+            <option>ICBC</option><option>DBS Bank (Singapura)</option><option>Mizuho Bank</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="fr">
+        <label>💱 Moeda de Destino</label>
+        <select id="s-rcur" onchange="updConv()">
+          <option value="BRL" selected>R$ BRL</option><option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option><option value="CNY">¥ CNY</option>
+          <option value="GBP">£ GBP</option><option value="JPY">¥ JPY</option>
+          <option value="CHF">Fr CHF</option><option value="ARS">$ ARS</option>
+          <option value="CAD">C$ CAD</option><option value="AUD">A$ AUD</option>
+        </select>
+      </div>
+
+      <div class="cprev">
+        <span class="cf" id="cpf">$ 1.000.000,00 USD</span>
+        <span class="ca">→</span>
+        <span class="ct" id="cpt">R$ 5.050.000,00 BRL</span>
+        <span class="cr" id="cpr">Taxa: 1 USD = 5,0500 BRL · cotação simulada</span>
+      </div>
+
+      <div class="dvd"></div>
+
+      <div class="fr">
+        <label>📡 Método de Transmissão</label>
+        <div class="mgrid">
+          <label class="mopt on" onclick="selMethod(this,'qkd')"><input type="radio" name="met" value="qkd" checked>
+            <div class="mn2">⚛ QKD / Fibra</div><div class="md">Segurança incondicional</div></label>
+          <label class="mopt" onclick="selMethod(this,'satellite')"><input type="radio" name="met" value="satellite">
+            <div class="mn2">🛰 Satélite Quântico</div><div class="md">Global · Micius LEO</div></label>
+          <label class="mopt" onclick="selMethod(this,'pqc')"><input type="radio" name="met" value="pqc">
+            <div class="mn2">🔒 TLS-PQC Híbrido</div><div class="md">Kyber-1024 + X25519</div></label>
+          <label class="mopt" onclick="selMethod(this,'classical')"><input type="radio" name="met" value="classical">
+            <div class="mn2">🔌 Fibra Clássica</div><div class="md">TLS 1.2 · Legado</div></label>
+        </div>
+      </div>
+
+      <div class="fr">
+        <label>🔑 Algoritmo de Assinatura</label>
+        <select id="s-cry">
+          <option value="dilithium">Dilithium-3 — Pós-Quântico (NIST 2024) ✅</option>
+          <option value="kyber">Kyber-1024 — KEM Pós-Quântico ✅</option>
+          <option value="ecdsa">ECDSA secp256k1 — Clássico ⚠</option>
+          <option value="rsa">RSA-2048 — Legado ❌</option>
+        </select>
+      </div>
+
+      <button class="bstart" id="bstart" onclick="runSim()">▶ ENVIAR TRANSAÇÃO</button>
+      <button class="breset" onclick="resetLog()">↺ Limpar Log</button>
+
+      <div class="atk-section">
+        <div class="atk-label">⚔ Simular Ataque / Interferência</div>
+        <div class="fr" style="margin-bottom:.45rem">
+          <select id="s-atk">
+            <option value="mitm">🕵 MITM — Interceptação em Trânsito</option>
+            <option value="shor">⚛ Algoritmo de Shor — Quebra RSA/ECDSA</option>
+            <option value="eve">👁 Eva — Espionagem QKD (BB84)</option>
+            <option value="replay">🔁 Replay Attack — Reutilização de TX</option>
+            <option value="brute">💻 Força Bruta — Ataque Clássico/Quântico</option>
+          </select>
+        </div>
+        <button class="batk" id="batk" onclick="runAttack()">⚔ Simular Ataque</button>
+      </div>
+    </div>
+
+    <!-- LOG -->
+    <div class="log-wrap">
+      <div class="lh">
+        <h3>📋 <span id="ltitle">Log da Transação</span></h3>
+        <span class="lstat" id="lstat">⏳ Aguardando...</span>
+      </div>
+      <div class="pbar"><div class="pfill" id="pfill"></div></div>
+      <div class="lbody" id="lbody">
+        <div class="lempty">Configure os parâmetros e clique em <strong>Enviar Transação</strong> para iniciar a simulação completa com log passo a passo.</div>
+      </div>
+      <div class="rcard" id="rcard">
+        <div class="ri">✅</div>
+        <h4>Transação Confirmada na Blockchain!</h4>
+        <div class="ramts" id="ramts"></div>
+        <p id="rdet"></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- BLOCKCHAIN CHAIN -->
+<section id="chain">
+<div class="cnt">
+  <div class="sh">
+    <h2>⛓ Blockchain — <em>Cadeia de Blocos ao Vivo</em></h2>
+    <p>Cada bloco referencia o hash do anterior, tornando adulteração computacionalmente inviável. Clique em qualquer bloco para inspecionar seus campos internos.</p>
+  </div>
+  <div class="chain-layout">
+    <div>
+      <div class="cscroll"><div class="crow" id="crow"></div></div>
+      <div class="cctrl">
+        <button class="bsm bp" onclick="addBlk()">+ Novo Bloco</button>
+        <button class="bsm bd" onclick="tamper()">⚠ Simular Adulteração</button>
+        <button class="bsm" onclick="resetChain()">↺ Reiniciar</button>
+      </div>
+      <div class="leg">
+        <span style="background:rgba(0,245,255,.4)"></span>Gênese &nbsp;
+        <span style="background:rgba(155,89,182,.4)"></span>Normal &nbsp;
+        <span style="background:rgba(231,76,60,.4)"></span>Adulterado
+      </div>
+      <div class="hform" id="hform">Clique em um bloco para ver: H(dados || hash_anterior || nonce || timestamp) = hash</div>
+    </div>
+    <div class="bdp">
+      <h3>🔍 Detalhes do Bloco</h3>
+      <div id="bdp-body"><p style="color:var(--txt2);font-size:.78rem">Clique em um bloco para ver seus campos e a árvore de Merkle.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CRYPTOGRAPHY COMPARISON -->
+<section id="crypto">
+<div class="cnt">
+  <div class="sh">
+    <h2>🔐 Criptografia — <em>Segurança e Vulnerabilidades</em></h2>
+    <p>Comparativo dos algoritmos usados em transações bancárias blockchain. Identifique vulnerabilidades quânticas, tempos de resposta e adoção por sistemas financeiros globais.</p>
+  </div>
+
+  <div class="crypto-grid">
+    <div class="crypto-card cc-vuln">
+      <div class="cc-name">RSA-2048</div>
+      <div class="cc-type">Criptografia Assimétrica Clássica</div>
+      <div class="cc-stats">
+        <div class="ccs"><div class="ccs-l">Chave</div><div class="ccs-v" style="color:var(--txt)">2048 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Clássica</div><div class="ccs-v" style="color:var(--o)">112 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Tempo Médio</div><div class="ccs-v" style="color:var(--g)">~10 ms</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Quântica</div><div class="ccs-v" style="color:var(--r)">0 bits ❌</div></div>
+      </div>
+      <div class="cc-bottom"><span class="q-vuln">❌ QUEBRADO — Algoritmo de Shor O(log³n)</span></div>
+      <div style="font-size:.68rem;color:var(--txt2);margin-top:.4rem">Usado: TLS legado, SWIFT, certificados digitais bancários</div>
+    </div>
+
+    <div class="crypto-card cc-vuln">
+      <div class="cc-name">ECDSA secp256k1</div>
+      <div class="cc-type">Assinatura de Curva Elíptica</div>
+      <div class="cc-stats">
+        <div class="ccs"><div class="ccs-l">Chave</div><div class="ccs-v" style="color:var(--txt)">256 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Clássica</div><div class="ccs-v" style="color:var(--g)">128 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Tempo Médio</div><div class="ccs-v" style="color:var(--g)">~1.5 ms</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Quântica</div><div class="ccs-v" style="color:var(--r)">0 bits ❌</div></div>
+      </div>
+      <div class="cc-bottom"><span class="q-vuln">❌ VULNERÁVEL — Shor resolve log. discreto em CE</span></div>
+      <div style="font-size:.68rem;color:var(--txt2);margin-top:.4rem">Usado: Bitcoin, Ethereum, bancos DeFi, TLS 1.3</div>
+    </div>
+
+    <div class="crypto-card cc-warn">
+      <div class="cc-name">AES-256</div>
+      <div class="cc-type">Cifragem Simétrica · Universal</div>
+      <div class="cc-stats">
+        <div class="ccs"><div class="ccs-l">Chave</div><div class="ccs-v" style="color:var(--txt)">256 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Clássica</div><div class="ccs-v" style="color:var(--g)">256 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Tempo Médio</div><div class="ccs-v" style="color:var(--g)">&lt;0.1 ms</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Quântica</div><div class="ccs-v" style="color:var(--o)">128 bits ⚠</div></div>
+      </div>
+      <div class="cc-bottom"><span class="q-warn">⚠ RESISTENTE (reduzido) — Grover reduz p/ 128 bits</span></div>
+      <div style="font-size:.68rem;color:var(--txt2);margin-top:.4rem">Usado: Todos os bancos, TLS 1.3 (AES-256-GCM)</div>
+    </div>
+
+    <div class="crypto-card cc-warn">
+      <div class="cc-name">SHA-256</div>
+      <div class="cc-type">Função Hash Criptográfica</div>
+      <div class="cc-stats">
+        <div class="ccs"><div class="ccs-l">Saída</div><div class="ccs-v" style="color:var(--txt)">256 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Clássica</div><div class="ccs-v" style="color:var(--g)">256 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Tempo Médio</div><div class="ccs-v" style="color:var(--g)">&lt;0.1 ms</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Quântica</div><div class="ccs-v" style="color:var(--o)">128 bits ⚠</div></div>
+      </div>
+      <div class="cc-bottom"><span class="q-warn">⚠ RESISTENTE (reduzido) — Grover 2× mais rápido</span></div>
+      <div style="font-size:.68rem;color:var(--txt2);margin-top:.4rem">Usado: Bitcoin PoW, Merkle trees, HMAC bancário</div>
+    </div>
+
+    <div class="crypto-card cc-safe">
+      <div class="cc-name">Dilithium-3</div>
+      <div class="cc-type">Assinatura Pós-Quântica — NIST FIPS 204 (2024)</div>
+      <div class="cc-stats">
+        <div class="ccs"><div class="ccs-l">Assinatura</div><div class="ccs-v" style="color:var(--q)">2.420 bytes</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Clássica</div><div class="ccs-v" style="color:var(--g)">128 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Tempo Médio</div><div class="ccs-v" style="color:var(--g)">~1 ms</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Quântica</div><div class="ccs-v" style="color:var(--g)">128 bits ✅</div></div>
+      </div>
+      <div class="cc-bottom"><span class="q-safe">✅ SEGURO — Module-LWE (lattice), imune ao Shor</span></div>
+      <div style="font-size:.68rem;color:var(--txt2);margin-top:.4rem">Usado: NIST PQC 2024, próxima geração TLS, CBDC</div>
+    </div>
+
+    <div class="crypto-card cc-safe">
+      <div class="cc-name">Kyber-1024</div>
+      <div class="cc-type">KEM Pós-Quântico — NIST FIPS 203 (2024)</div>
+      <div class="cc-stats">
+        <div class="ccs"><div class="ccs-l">Chave Pública</div><div class="ccs-v" style="color:var(--q)">1.568 bytes</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Clássica</div><div class="ccs-v" style="color:var(--g)">256 bits</div></div>
+        <div class="ccs"><div class="ccs-l">Tempo Médio</div><div class="ccs-v" style="color:var(--g)">~0.5 ms</div></div>
+        <div class="ccs"><div class="ccs-l">Seg. Quântica</div><div class="ccs-v" style="color:var(--g)">256 bits ✅</div></div>
+      </div>
+      <div class="cc-bottom"><span class="q-safe">✅ MELHOR PROTEÇÃO — Module-LWE KEM, máxima segurança</span></div>
+      <div style="font-size:.68rem;color:var(--txt2);margin-top:.4rem">Usado: TLS-PQC híbrido, JPMorgan, Google, NIST 2024</div>
+    </div>
+  </div>
+
+  <div class="sh" style="margin-top:.5rem;margin-bottom:.9rem">
+    <h3 style="font-size:1rem;font-weight:700">📊 Tabela Completa — Algoritmos × Vulnerabilidades × Uso Bancário</h3>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="crypto-table">
+      <thead>
+        <tr>
+          <th>Algoritmo</th><th>Tipo</th><th>Chave / Saída</th>
+          <th>Ameaça Quântica</th><th>Atacante Quântico</th>
+          <th>Tempo Médio</th><th>Bancos / Sistemas</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="algo-name">RSA-2048</td><td>Assimétrico</td><td>2048 bits</td><td class="q-vuln">❌ Crítico</td><td>Shor O(log³n)</td><td><span class="time-chip">~10 ms</span></td><td style="font-size:.73rem">TLS legado, SWIFT, certificados</td><td><span class="prog-badge" style="background:rgba(231,76,60,.1);color:var(--r);border:1px solid rgba(231,76,60,.3)">● Deprecar</span></td></tr>
+        <tr><td class="algo-name">RSA-4096</td><td>Assimétrico</td><td>4096 bits</td><td class="q-vuln">❌ Crítico</td><td>Shor (mais lento)</td><td><span class="time-chip">~40 ms</span></td><td style="font-size:.73rem">PKI bancária, certificados EV</td><td><span class="prog-badge" style="background:rgba(231,76,60,.1);color:var(--r);border:1px solid rgba(231,76,60,.3)">● Deprecar</span></td></tr>
+        <tr><td class="algo-name">ECDSA P-256</td><td>Assinatura CE</td><td>256 bits</td><td class="q-vuln">❌ Crítico</td><td>Shor em curva elíptica</td><td><span class="time-chip">~1 ms</span></td><td style="font-size:.73rem">TLS 1.3, JWT, Ethereum, Pix</td><td><span class="prog-badge" style="background:rgba(231,76,60,.1);color:var(--r);border:1px solid rgba(231,76,60,.3)">● Deprecar</span></td></tr>
+        <tr><td class="algo-name">ECDSA secp256k1</td><td>Assinatura CE</td><td>256 bits</td><td class="q-vuln">❌ Crítico</td><td>Shor em curva elíptica</td><td><span class="time-chip">~1.5 ms</span></td><td style="font-size:.73rem">Bitcoin, DeFi, exchanges</td><td><span class="prog-badge" style="background:rgba(231,76,60,.1);color:var(--r);border:1px solid rgba(231,76,60,.3)">● Deprecar</span></td></tr>
+        <tr><td class="algo-name">3DES / DES</td><td>Simétrico</td><td>56–168 bits</td><td class="q-vuln">❌ Inseguro</td><td>Clássico + Grover</td><td><span class="time-chip">~1 ms</span></td><td style="font-size:.73rem">SWIFT legado (em phase-out)</td><td><span class="prog-badge" style="background:rgba(231,76,60,.1);color:var(--r);border:1px solid rgba(231,76,60,.3)">● Descontinuado</span></td></tr>
+        <tr><td class="algo-name">AES-128</td><td>Simétrico</td><td>128 bits</td><td class="q-warn">⚠ Reduzido</td><td>Grover → 64 bits</td><td><span class="time-chip">&lt;0.1 ms</span></td><td style="font-size:.73rem">TLS 1.2 antigo, apps legados</td><td><span class="prog-badge pb-pilot">● Migrar → 256</span></td></tr>
+        <tr><td class="algo-name">AES-256</td><td>Simétrico</td><td>256 bits</td><td class="q-warn">⚠ 128 bits</td><td>Grover (2× mais rápido)</td><td><span class="time-chip">&lt;0.1 ms</span></td><td style="font-size:.73rem">Todos os bancos, TLS 1.3, CBDC</td><td><span class="prog-badge pb-active">● Recomendado</span></td></tr>
+        <tr><td class="algo-name">SHA-256</td><td>Hash</td><td>256 bits</td><td class="q-warn">⚠ 128 bits</td><td>Grover busca</td><td><span class="time-chip">&lt;0.1 ms</span></td><td style="font-size:.73rem">Bitcoin PoW, Merkle, HMAC</td><td><span class="prog-badge pb-active">● Aceitável</span></td></tr>
+        <tr><td class="algo-name">SHA-3 / Keccak</td><td>Hash</td><td>256–512 bits</td><td class="q-warn">⚠ 128–256 bits</td><td>Grover (menor impacto)</td><td><span class="time-chip">&lt;0.1 ms</span></td><td style="font-size:.73rem">Ethereum, regulação europeia</td><td><span class="prog-badge pb-active">● Recomendado</span></td></tr>
+        <tr><td class="algo-name">ChaCha20-Poly1305</td><td>Simétrico+MAC</td><td>256 bits</td><td class="q-warn">⚠ 128 bits</td><td>Grover → 128 bits</td><td><span class="time-chip">&lt;0.1 ms</span></td><td style="font-size:.73rem">TLS 1.3, apps móveis, CBDC</td><td><span class="prog-badge pb-active">● Recomendado</span></td></tr>
+        <tr><td class="algo-name">CRYSTALS-Dilithium-3</td><td>PQC Assinatura</td><td>2.420 bytes</td><td class="q-safe">✅ 128 bits</td><td>Nenhum conhecido</td><td><span class="time-chip">~1 ms</span></td><td style="font-size:.73rem">NIST FIPS 204 (2024), CBDC</td><td><span class="prog-badge pb-active">● NIST 2024</span></td></tr>
+        <tr><td class="algo-name">CRYSTALS-Kyber-1024</td><td>PQC KEM</td><td>1.568 bytes</td><td class="q-safe">✅ 256 bits</td><td>Nenhum conhecido</td><td><span class="time-chip">~0.5 ms</span></td><td style="font-size:.73rem">NIST FIPS 203 (2024), JPMorgan</td><td><span class="prog-badge pb-active">● NIST 2024</span></td></tr>
+        <tr><td class="algo-name">SPHINCS+</td><td>PQC Assinatura</td><td>7.856–49.856 bytes</td><td class="q-safe">✅ 128–256 bits</td><td>Nenhum conhecido</td><td><span class="time-chip">~50 ms</span></td><td style="font-size:.73rem">NIST FIPS 205 (2024), PKI longo prazo</td><td><span class="prog-badge pb-active">● NIST 2024</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.7rem;color:var(--txt2);margin-top:.75rem;line-height:1.65">
+    <strong style="color:var(--txt)">Nota:</strong> Seg. Quântica = nível efetivo contra QC escalável com correção de erro. ❌ vulnerável ao <strong>Algoritmo de Shor</strong> (fatoração / log. discreto). ⚠ afetado pelo <strong>Algoritmo de Grover</strong> (reduz segurança à metade em bits). ✅ imune ao estado atual e futuro de ameaças quânticas. Fontes: NIST FIPS 203/204/205 (2024) · NSA CNSA 2.0 · ETSI QKD.
+  </p>
+</div>
+</section>
+
+<!-- TEASER -->
+<section id="teaser">
+<div class="cnt">
+  <div class="sh">
+    <h2>📚 Quer entender <em>como funciona</em>?</h2>
+    <p>A página de Informações Técnicas explica cada componente com animações, fórmulas e casos reais.</p>
+  </div>
+  <div class="tgrid">
+    <a href="info.html#quantum" class="tc"><div class="tci">⚛</div><h3>Computação Quântica</h3><p>Qubits, portas quânticas, QRNG interativo e criptografia pós-quântica Kyber + Dilithium.</p><span class="tca">Ver explicação →</span></a>
+    <a href="info.html#transmission" class="tc"><div class="tci">🌐</div><h3>Métodos de Transmissão</h3><p>Fibra óptica, QKD BB84, satélite quântico Micius, TLS-PQC — com animações interativas.</p><span class="tca">Ver explicação →</span></a>
+    <a href="info.html#servers" class="tc"><div class="tci">🖥</div><h3>Infraestrutura de Servidores</h3><p>Pipeline completo: servidor quântico → nó QKD → validador → nó blockchain.</p><span class="tca">Ver explicação →</span></a>
+    <a href="info.html#banks" class="tc"><div class="tci">🏦</div><h3>Bancos com Suporte Quântico</h3><p>Quais bancos hoje usam ou pesquisam computação quântica e QKD em suas operações reais.</p><span class="tca">Ver lista completa →</span></a>
+    <a href="info.html#hardware" class="tc"><div class="tci">⚙</div><h3>Hardware Quântico Real</h3><p>D-Wave Advantage2, QUIP Network e o estado atual do blockchain quântico industrial.</p><span class="tca">Ver hardware →</span></a>
+    <a href="examples.html" class="tc"><div class="tci">🧪</div><h3>Exemplos Práticos</h3><p>Azure Sparse Simulator, simulação com ruído Pauli e comparativos de simuladores quânticos.</p><span class="tca">Ver exemplos →</span></a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>⚛ QuantumChain Simulator · Protótipo Educacional · <a href="info.html">📚 Informações Técnicas</a> · <a href="examples.html">🧪 Exemplos</a></p>
+  <p style="margin-top:.2rem">Baseado em: Scientific Reports s41598-025-16315-8 (2025) · D-Wave Quantum (2026) · QUIP Network (2026) · NIST PQC FIPS 203/204/205 (2024) · BIS Reports · Azure Quantum Docs</p>
+  <p style="margin-top:.2rem;font-size:.7rem">Taxas de câmbio via open.er-api.com (cotação ao vivo) · Hashes simplificados para fins educacionais</p>
+  <div class="researchers">
+    <span class="res-label">Pesquisadores</span>
+    <span class="res-item"><span class="res-role">Pesquisadora</span>Clarice Cleny</span>
+    <span class="res-sep">·</span>
+    <span class="res-item"><span class="res-role">Orientador</span>Prof. Sergio Vieira</span>
+  </div>
+</footer>
+
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Alternar modo claro/escuro">☀</button>
+<script src="index.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>

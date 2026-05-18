@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumChain — Informações Técnicas</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('qc-theme')||'dark');</script>
+</head>
+<body class="pt">
+
+<nav>
+  <div class="logo">⚛ QuantumChain</div>
+  <div class="nav-links">
+    <a href="#arch">Arquitetura</a>
+    <a href="#quantum">Quântica</a>
+    <a href="#transmission">Transmissão</a>
+    <a href="#servers">Servidores</a>
+    <a href="#banks">Bancos</a>
+    <a href="#hardware">Hardware</a>
+    <a href="examples.html">Exemplos</a>
+  </div>
+  <a href="index.html" class="nav-back">← Voltar ao Simulador</a>
+</nav>
+
+<!-- INFO HERO -->
+<div class="info-hero pt">
+  <h1>Informações <em>Técnicas</em></h1>
+  <p>Conceitos, fórmulas, arquitetura e casos reais sobre blockchain quântico bancário — baseado em literatura científica e relatórios de organismos reguladores globais.</p>
+  <div class="toc">
+    <a href="#arch">🏗 Arquitetura</a>
+    <a href="#quantum">⚛ Computação Quântica</a>
+    <a href="#transmission">🌐 Transmissão</a>
+    <a href="#servers">🖥 Servidores</a>
+    <a href="#banks">🏦 Bancos Quânticos</a>
+    <a href="#hardware">⚙ Hardware Real</a>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<section id="arch" class="info-sec">
+<div class="cnt">
+  <div class="sh">
+    <h2>🏗 Visão Geral da <em>Arquitetura</em></h2>
+    <p>O fluxo completo de uma transação bancária segura com computação quântica: da geração de chaves ao registro imutável na blockchain.</p>
+  </div>
+
+  <div class="arch-flow">
+    <div class="an aq">
+      <div class="ai">⚛</div>
+      <div class="at">Computador Quântico</div>
+      <div class="ad">QRNG · Kyber · Dilithium<br>15 mK · 127 qubits</div>
+    </div>
+    <div class="aline"><div class="flowline"></div><div style="font-size:.62rem;color:var(--txt2);margin-top:.2rem">QKD / Fibra</div></div>
+    <div class="an ag">
+      <div class="ai">🌐</div>
+      <div class="at">Rede de Transmissão</div>
+      <div class="ad">BB84 · QBER &lt;11%<br>Satélite · TLS-PQC</div>
+    </div>
+    <div class="aline"><div class="flowline"></div><div style="font-size:.62rem;color:var(--txt2);margin-top:.2rem">TLS-PQC</div></div>
+    <div class="an ao">
+      <div class="ai">🖥</div>
+      <div class="at">Servidores</div>
+      <div class="ad">Validador · HSM<br>Consenso · Mempool</div>
+    </div>
+    <div class="aline"><div class="flowline"></div><div style="font-size:.62rem;color:var(--txt2);margin-top:.2rem">libp2p P2P</div></div>
+    <div class="an ab">
+      <div class="ai">⛓</div>
+      <div class="at">Blockchain</div>
+      <div class="ad">SHA-256 · Merkle<br>Smart Contracts · DLT</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="tag tq" style="margin-bottom:.7rem">Por que Quantum + Blockchain?</div>
+      <p style="font-size:.84rem;color:var(--txt2);line-height:1.7">O Algoritmo de <strong style="color:var(--txt)">Shor</strong> quebra RSA e ECDSA em <strong style="color:var(--q)">tempo polinomial O(log³n)</strong> em computadores quânticos com qubits suficientes. Bancos que assinam transações com ECDSA secp256k1 (Ethereum, Bitcoin) estarão vulneráveis quando QCs de larga escala existirem. A solução é dupla:<br>1. <strong style="color:var(--q)">QKD</strong> — distribuição de chaves com segurança física incondicional<br>2. <strong style="color:var(--b)">PQC</strong> — algoritmos matematicamente resistentes a Shor/Grover</p>
+      <div class="formula">Shor: fatorar n=p×q em O(log²n · log log n · poly) operações<br>vs. clássico: O(exp((64/9)^(1/3) · (log n)^(1/3) · (log log n)^(2/3)))</div>
+    </div>
+    <div class="card">
+      <div class="tag tb" style="margin-bottom:.7rem">Números do Mercado (2024–2026)</div>
+      <div style="display:flex;flex-direction:column;gap:.6rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:.5rem">
+          <span style="font-size:.82rem;color:var(--txt2)">Mercado global blockchain financeiro</span>
+          <span style="font-weight:700;color:var(--q)">USD 6,3 bi</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:.5rem">
+          <span style="font-size:.82rem;color:var(--txt2)">Projeção 2032 (CAGR 44%)</span>
+          <span style="font-weight:700;color:var(--q)">USD 115 bi</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:.5rem">
+          <span style="font-size:.82rem;color:var(--txt2)">Bancos centrais pesquisando CBDC</span>
+          <span style="font-weight:700;color:var(--g)">93%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:.5rem">
+          <span style="font-size:.82rem;color:var(--txt2)">JPMorgan repos/dia via Onyx (Ethereum)</span>
+          <span style="font-weight:700;color:var(--o)">USD 1 tri</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:.82rem;color:var(--txt2)">QUIP Network testnet — participantes (Abr 2026)</span>
+          <span style="font-weight:700;color:var(--b)">13.000+</span>
+        </div>
+      </div>
+      <p style="font-size:.72rem;color:var(--txt2);margin-top:.8rem">Fontes: BIS (2024) · Grand View Research · D-Wave Quantum (2026) · QUIP Network (2026)</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- QUANTUM COMPUTING -->
+<section id="quantum" class="info-sec">
+<div class="cnt">
+  <div class="sh">
+    <h2>⚛ Computação <em>Quântica</em></h2>
+    <p>Fundamentos dos qubits, portas quânticas, QRNG e criptografia pós-quântica aplicados ao setor bancário.</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:1.5rem">
+    <!-- Bloch Sphere -->
+    <div class="card">
+      <div class="tag tq" style="margin-bottom:.7rem">Esfera de Bloch — Estado do Qubit</div>
+      <div class="formula">|ψ⟩ = α|0⟩ + β|1⟩ &nbsp;&nbsp; onde |α|² + |β|² = 1</div>
+      <div class="bloch-wrap"><canvas id="bloch" width="200" height="200"></canvas></div>
+      <div class="g2" style="gap:.6rem;margin-top:.5rem">
+        <div>
+          <div style="font-size:.7rem;color:var(--txt2)">Amplitude α (|0⟩)</div>
+          <div class="meter"><div class="mf" id="ma" style="width:50%;background:linear-gradient(90deg,var(--q),var(--qd))"></div></div>
+          <div id="va" style="font-size:.76rem;font-family:monospace;color:var(--q)">0.7071</div>
+        </div>
+        <div>
+          <div style="font-size:.7rem;color:var(--txt2)">Amplitude β (|1⟩)</div>
+          <div class="meter"><div class="mf" id="mb" style="width:50%;background:linear-gradient(90deg,var(--b),var(--bd))"></div></div>
+          <div id="vb" style="font-size:.76rem;font-family:monospace;color:var(--b)">0.7071</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap">
+        <button class="btn-q2" onclick="applyH()">Porta Hadamard (H)</button>
+        <button class="btn-q2" onclick="mQubit()">Medir (colapso)</button>
+        <button class="btn-q2" onclick="bellState()">Estado de Bell</button>
+      </div>
+      <div id="qres" style="display:none;margin-top:.6rem;font-family:monospace;font-size:.85rem;text-align:center;color:var(--g)"></div>
+    </div>
+
+    <!-- QRNG -->
+    <div class="card">
+      <div class="tag tg" style="margin-bottom:.7rem">QRNG — Gerador Quântico de Bits Aleatórios</div>
+      <p style="font-size:.82rem;color:var(--txt2);line-height:1.65;margin-bottom:.7rem">A porta Hadamard cria superposição perfeita em |0⟩. Medir colapsa em 0 ou 1 com P=0,5 — entropia genuinamente imprevisível, ao contrário de PRNGs determinísticos.</p>
+      <div class="formula">H|0⟩ = (|0⟩+|1⟩)/√2 → medir → bit aleatório quântico<br>P(0) = |α|² = 0.5 &nbsp;·&nbsp; P(1) = |β|² = 0.5</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0">
+        <button class="btn-q2" onclick="qrng(8)">8 bits</button>
+        <button class="btn-q2" onclick="qrng(32)">32 bits</button>
+        <button class="btn-q2" onclick="qrng(128)">128 bits</button>
+        <button class="btn-q2" onclick="qrng(256)">Chave 256-bit</button>
+      </div>
+      <div style="font-size:.7rem;color:var(--txt2);margin-bottom:.25rem">Bits medidos (quânticos):</div>
+      <div class="qout" id="qout">Clique acima para gerar bits quânticos verdadeiramente aleatórios via simulação de Hadamard...</div>
+      <div style="font-size:.7rem;color:var(--txt2);margin:.4rem 0 .25rem">Hex:</div>
+      <div class="qout" id="qhex" style="color:var(--b)">—</div>
+      <div class="qbit-row" id="qbits"></div>
+    </div>
+  </div>
+
+  <!-- Quantum Gates -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag tq" style="margin-bottom:.9rem">Portas Quânticas Fundamentais</div>
+    <div class="qgrid">
+      <div class="qgc">
+        <div class="gname">H (Hadamard)</div>
+        <div class="formula" style="font-size:.72rem;padding:.35rem;margin:.35rem 0">1/√2 [[1,1],[1,-1]]</div>
+        <div class="gdesc">Cria superposição perfeita a partir de |0⟩. Base do QRNG. Aplicar 2× retorna ao estado inicial.</div>
+      </div>
+      <div class="qgc">
+        <div class="gname">CNOT</div>
+        <div class="formula" style="font-size:.72rem;padding:.35rem;margin:.35rem 0">|00⟩→|00⟩ · |01⟩→|01⟩<br>|10⟩→|11⟩ · |11⟩→|10⟩</div>
+        <div class="gdesc">Inverte o qubit alvo se o controle = |1⟩. Combinado com H cria estados de Bell — base do QKD.</div>
+      </div>
+      <div class="qgc">
+        <div class="gname">Shor ⚠</div>
+        <div class="formula" style="font-size:.72rem;padding:.35rem;margin:.35rem 0">Fatoração: O(log³n)<br>vs. clássico: O(exp(n^(1/3)))</div>
+        <div class="gdesc">Quebra RSA e ECDSA. Com ~4.000 qubits lógicos quebraria RSA-2048. Ameaça toda criptografia assimétrica clássica.</div>
+      </div>
+      <div class="qgc">
+        <div class="gname">Grover</div>
+        <div class="formula" style="font-size:.72rem;padding:.35rem;margin:.35rem 0">Busca: O(√N)<br>vs. clássico: O(N)</div>
+        <div class="gdesc">Reduz segurança de hash à metade. SHA-256 reduz para segurança de 128 bits — ainda considerado seguro no horizonte relevante.</div>
+      </div>
+    </div>
+    <div class="formula" style="margin-top:1rem">Estado de Bell (entrelaçamento máximo): |Φ⁺⟩ = (1/√2)(|00⟩ + |11⟩)<br>Medir qubit A colapsa qubit B instantaneamente — independente da distância física.</div>
+  </div>
+
+  <!-- PQC -->
+  <div class="card">
+    <div class="tag tb" style="margin-bottom:.9rem">Criptografia Pós-Quântica — Padrões NIST 2024</div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:1rem">O NIST padronizou em agosto de 2024 os primeiros algoritmos pós-quânticos — a futura base para blockchain bancário resistente a computadores quânticos:</p>
+    <div class="g3">
+      <div style="background:#080820;border:1px solid var(--border);border-radius:8px;padding:.9rem">
+        <div style="font-size:.8rem;font-weight:700;color:var(--q);margin-bottom:.4rem">CRYSTALS-Kyber (KEM)</div>
+        <div style="font-size:.75rem;color:var(--txt2);line-height:1.55">Encapsulamento de chaves baseado em <strong style="color:var(--txt)">redes lattice</strong> (Module-LWE). Substitui RSA/ECDH para troca de chaves. Resistente a Shor.</div>
+        <div class="formula" style="font-size:.68rem;padding:.35rem;margin:.5rem 0">Tamanho chave pública: 1.568 bytes<br>Chave secreta: 2.400 bytes<br>Ciphertext: 1.568 bytes</div>
+        <div class="tag tg">FIPS 203 (2024)</div>
+      </div>
+      <div style="background:#080820;border:1px solid var(--border);border-radius:8px;padding:.9rem">
+        <div style="font-size:.8rem;font-weight:700;color:var(--b);margin-bottom:.4rem">CRYSTALS-Dilithium (Assinatura)</div>
+        <div style="font-size:.75rem;color:var(--txt2);line-height:1.55">Assinaturas digitais baseadas em <strong style="color:var(--txt)">módulo-lattice</strong>. Substitui ECDSA secp256k1 no blockchain. Seguro contra Shor e Grover.</div>
+        <div class="formula" style="font-size:.68rem;padding:.35rem;margin:.5rem 0">Assinatura Dilithium-3: 2.420 bytes<br>vs ECDSA: ~72 bytes<br>Tradeoff: tamanho por segurança quântica</div>
+        <div class="tag tb">FIPS 204 (2024)</div>
+      </div>
+      <div style="background:#080820;border:1px solid var(--border);border-radius:8px;padding:.9rem">
+        <div style="font-size:.8rem;font-weight:700;color:var(--o);margin-bottom:.4rem">SPHINCS+ (Hash-based)</div>
+        <div style="font-size:.75rem;color:var(--txt2);line-height:1.55">Assinaturas baseadas apenas em <strong style="color:var(--txt)">funções hash</strong>. Mais conservador — segurança depende apenas da resistência do SHA-256 a Grover.</div>
+        <div class="formula" style="font-size:.68rem;padding:.35rem;margin:.5rem 0">SPHINCS+-SHAKE-256: 49.856 bytes<br>Sem estado (stateless) — ideal<br>para certificados de longa duração</div>
+        <div class="tag to">FIPS 205 (2024)</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TRANSMISSION -->
+<section id="transmission" class="info-sec">
+<div class="cnt">
+  <div class="sh">
+    <h2>🌐 Métodos de <em>Transmissão</em></h2>
+    <p>A transmissão segura entre computador quântico e nós blockchain pode usar diferentes meios físicos — cada um com características únicas de segurança, distância e custo.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="swTx('fiber',this)">🔵 Fibra Óptica + QKD</button>
+    <button class="tab" onclick="swTx('qkd',this)">⚛ Protocolo BB84</button>
+    <button class="tab" onclick="swTx('satellite',this)">🛰 Satélite Quântico</button>
+    <button class="tab" onclick="swTx('pqc',this)">🔒 TLS-PQC Híbrido</button>
+    <button class="tab" onclick="swTx('classical',this)">🔌 Fibra Clássica</button>
+  </div>
+
+  <div class="tcontent on" id="tc-fiber">
+    <div>
+      <div class="tag tg" style="margin-bottom:.7rem">Fibra Óptica Monomodo + QKD</div>
+      <h3 style="font-size:1.1rem;margin-bottom:.6rem">Transmissão de Fótons por Sílica</h3>
+      <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:.7rem">A fibra óptica monomodo transmite fótons individuais com estado quântico preservado (polarização, fase). Para QKD, cada fóton carrega um qubit — qualquer medição por um espião perturba o estado e é detectável via aumento do QBER.</p>
+      <div class="formula">Atenuação: ~0,2 dB/km (λ=1550nm)<br>Limite sem repetidores: ~300–600 km<br>Comprimento de coerência: metros (detector SPD)</div>
+      <div class="spec-g">
+        <div class="spec"><div class="splab">Velocidade da luz</div><div class="spval">~200.000 km/s</div></div>
+        <div class="spec"><div class="splab">Comprimento de onda</div><div class="spval">1550 nm</div></div>
+        <div class="spec"><div class="splab">Distância QKD máx.</div><div class="spval">300–600 km</div></div>
+        <div class="spec"><div class="splab">Detecção de espião</div><div class="spval" style="color:var(--g)">Garantida (física)</div></div>
+      </div>
+    </div>
+    <div class="txcvs"><canvas id="tx-fiber" width="480" height="260"></canvas></div>
+  </div>
+
+  <div class="tcontent" id="tc-qkd">
+    <div>
+      <div class="tag tq" style="margin-bottom:.7rem">Protocolo BB84 — Charles Bennett & Gilles Brassard (1984)</div>
+      <h3 style="font-size:1.1rem;margin-bottom:.6rem">Distribuição Quântica de Chaves — Segurança Incondicional</h3>
+      <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:.7rem">BB84 usa 4 estados de polarização em 2 bases. Alice envia qubits; Bob mede em bases aleatórias. Bases compatíveis geram bits de chave — incompatíveis são descartados. Qualquer espião causa colapso detectável.</p>
+      <div class="formula">Alice: bit 0 → {↑ ou →} · bit 1 → {↗ ou ↘}<br>Bob: mede em base {+} ou {×} aleatoriamente<br>QBER &gt; 11% → canal comprometido → abortar</div>
+      <div class="spec-g">
+        <div class="spec"><div class="splab">P(detecção/qubit)</div><div class="spval">25%</div></div>
+        <div class="spec"><div class="splab">P(não detectar, n bits)</div><div class="spval">0,75ⁿ → 0</div></div>
+        <div class="spec"><div class="splab">Taxa de chave típica</div><div class="spval">1–10 Mbps</div></div>
+        <div class="spec"><div class="splab">Segurança</div><div class="spval" style="color:var(--g)">Incondicional</div></div>
+      </div>
+    </div>
+    <div class="txcvs"><canvas id="tx-qkd" width="480" height="260"></canvas></div>
+  </div>
+
+  <div class="tcontent" id="tc-satellite">
+    <div>
+      <div class="tag tb" style="margin-bottom:.7rem">Satélite Quântico LEO — Micius (2016)</div>
+      <h3 style="font-size:1.1rem;margin-bottom:.6rem">QKD Intercontinental via Satélite</h3>
+      <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:.7rem">Para distâncias &gt;600 km, a fibra perde todos os fótons. O satélite chinês <strong style="color:var(--txt)">Micius</strong> demonstrou QKD entre Beijing e Viena (7.600 km) em 2017, usando o satélite como nó intermediário no vácuo — onde a atenuação é geométrica (∝r²) em vez de exponencial.</p>
+      <div class="formula">Perda fibra: 0,2 dB/km → 120 dB/600km (intransponível)<br>Perda satélite: L ∝ (λ·r / D_tel)² → viável com telescópios<br>Eficiência canal: ~10⁻⁸ fótons transmitidos/detectados</div>
+      <div class="spec-g">
+        <div class="spec"><div class="splab">Altitude</div><div class="spval">~500 km LEO</div></div>
+        <div class="spec"><div class="splab">Distância máxima</div><div class="spval">Intercontinental</div></div>
+        <div class="spec"><div class="splab">Janela operacional</div><div class="spval">~5 min/passagem</div></div>
+        <div class="spec"><div class="splab">Demonstração real</div><div class="spval">Beijing–Viena 2017</div></div>
+      </div>
+    </div>
+    <div class="txcvs"><canvas id="tx-satellite" width="480" height="260"></canvas></div>
+  </div>
+
+  <div class="tcontent" id="tc-pqc">
+    <div>
+      <div class="tag tq" style="margin-bottom:.7rem">TLS 1.3 com PQC Híbrido (Kyber + X25519)</div>
+      <h3 style="font-size:1.1rem;margin-bottom:.6rem">Criptografia Pós-Quântica sobre Redes Clássicas</h3>
+      <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:.7rem">Enquanto QKD não escala globalmente, a abordagem prática é combinar Kyber-1024 com X25519 no mesmo handshake TLS 1.3. Se Kyber for quebrado, X25519 mantém a proteção; se computadores quânticos aparecerem, Kyber protege.</p>
+      <div class="formula">KeyShare = Kyber-1024 || X25519 (concatenados)<br>SharedSecret = KDF(Kyber_SS || X25519_SS)<br>Segurança: min(segurança_Kyber, segurança_X25519)</div>
+      <div class="spec-g">
+        <div class="spec"><div class="splab">Velocidade</div><div class="spval">&gt;100 Gbps</div></div>
+        <div class="spec"><div class="splab">Latência overhead</div><div class="spval">+2–5ms vs TLS clássico</div></div>
+        <div class="spec"><div class="splab">Segurança quântica</div><div class="spval" style="color:var(--o)">Computacional</div></div>
+        <div class="spec"><div class="splab">Implantação</div><div class="spval" style="color:var(--g)">Disponível agora</div></div>
+      </div>
+    </div>
+    <div class="txcvs"><canvas id="tx-pqc" width="480" height="260"></canvas></div>
+  </div>
+
+  <div class="tcontent" id="tc-classical">
+    <div>
+      <div class="tag to" style="margin-bottom:.7rem">Fibra Óptica Clássica — TCP/IP</div>
+      <h3 style="font-size:1.1rem;margin-bottom:.6rem">Infraestrutura Atual — Vulnerável no Futuro Quântico</h3>
+      <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:.7rem">A infraestrutura atual de transmissão bancária usa fibra óptica com TLS 1.2 ou 1.3 e criptografia assimétrica RSA/ECDSA. É eficiente e escalonável, mas não protege contra "harvest now, decrypt later" — onde adversários coletam tráfego cifrado hoje para decriptar com QCs futuros.</p>
+      <div class="formula">TLS 1.2: RSA-2048 (vulnerável ao Shor) + AES-256<br>"Harvest now, decrypt later": dados confidenciais coletados hoje<br>podem ser decriptados quando QCs de escala existirem</div>
+      <div class="spec-g">
+        <div class="spec"><div class="splab">Velocidade</div><div class="spval">1–400 Gbps</div></div>
+        <div class="spec"><div class="splab">Custo</div><div class="spval" style="color:var(--g)">Muito baixo</div></div>
+        <div class="spec"><div class="splab">Seg. longo prazo</div><div class="spval" style="color:var(--r)">Risco quântico</div></div>
+        <div class="spec"><div class="splab">Implantação</div><div class="spval">Global (legado)</div></div>
+      </div>
+    </div>
+    <div class="txcvs"><canvas id="tx-classical" width="480" height="260"></canvas></div>
+  </div>
+
+  <div class="card" style="margin-top:2rem">
+    <h3 style="font-size:.95rem;font-weight:700;margin-bottom:1rem;color:var(--q)">Comparativo de Métodos de Transmissão</h3>
+    <div class="btable-wrap">
+      <table class="ctable">
+        <thead><tr><th>Método</th><th>Velocidade</th><th>Distância</th><th>Seg. Quântica</th><th>Custo</th><th>Maturidade</th></tr></thead>
+        <tbody>
+          <tr><td><strong>QKD · Fibra Monomodo</strong></td><td>~1–10 Mbps (chave)</td><td>300–600 km</td><td class="yes">● Incondicional</td><td class="no">● Alto</td><td>TRL 7–8</td></tr>
+          <tr><td><strong>Satélite Quântico</strong></td><td>~kbps (chave)</td><td>Global</td><td class="yes">● Incondicional*</td><td class="no">● Extremo</td><td>TRL 6–7</td></tr>
+          <tr><td><strong>Repetidores Quânticos</strong></td><td>Em desenvolvimento</td><td>Ilimitada</td><td class="yes">● Incondicional</td><td class="no">● Extremo</td><td>TRL 3–4</td></tr>
+          <tr><td><strong>TLS-PQC Híbrido</strong></td><td>100+ Gbps</td><td>Global</td><td class="par">● Computacional</td><td class="yes">● Baixo</td><td>TRL 9</td></tr>
+          <tr><td><strong>Fibra Clássica TLS 1.2</strong></td><td>1–400 Gbps</td><td>Global</td><td class="no">● Nenhuma</td><td class="yes">● Muito baixo</td><td>TRL 9</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.7rem;color:var(--txt2);margin-top:.6rem">*Satélite com "nó confiável" — segurança depende da integridade do satélite. TRL = Technology Readiness Level (NASA).</p>
+  </div>
+</div>
+</section>
+
+<!-- SERVERS -->
+<section id="servers" class="info-sec">
+<div class="cnt">
+  <div class="sh">
+    <h2>🖥 Infraestrutura de <em>Servidores</em></h2>
+    <p>Pipeline completo de uma transação: cada servidor tem função específica, hardware especializado e protocolos de comunicação distintos.</p>
+  </div>
+
+  <div class="srv-flow">
+    <div class="srv sq">
+      <div class="si">⚛</div>
+      <h3>1. Servidor Quântico</h3>
+      <p>Computador quântico ou servidor com módulo QRNG. Opera próximo ao zero absoluto.</p>
+      <ul>
+        <li>QRNG certificado (flutuações do vácuo)</li>
+        <li>Geração de par de chaves Kyber/Dilithium</li>
+        <li>Temperatura: 15 mK (qubits supercondutores)</li>
+        <li>HSM integrado para armazenar chaves</li>
+        <li>Interface clássica via criostato controlado</li>
+      </ul>
+      <div class="sbar"><div class="sdot"></div>Online · 15 mK · 127 qubits</div>
+    </div>
+    <div class="srv sn">
+      <div class="si">🌐</div>
+      <h3>2. Nó de Rede QKD</h3>
+      <p>Gerencia o canal quântico e a distribuição de chaves entre os participantes.</p>
+      <ul>
+        <li>Executa protocolo BB84 / E91</li>
+        <li>Mede QBER em tempo real</li>
+        <li>Privacy amplification e reconciliação</li>
+        <li>Autenticação via canal clássico paralelo</li>
+        <li>Gerencia keystore criptografado (OTP)</li>
+      </ul>
+      <div class="sbar"><div class="sdot"></div>QBER: 3,2% · Canal SEGURO</div>
+    </div>
+    <div class="srv sv2">
+      <div class="si">🔍</div>
+      <h3>3. Nó Validador</h3>
+      <p>Verifica assinaturas digitais, valida regras de negócio e propaga para a rede.</p>
+      <ul>
+        <li>Verifica assinatura Dilithium-3 / ECDSA</li>
+        <li>Checa saldo e double-spend</li>
+        <li>Executa smart contracts (EVM/WASM)</li>
+        <li>Propaga via libp2p gossip p2p</li>
+        <li>Participa do consenso (PoS / PoR-Lite)</li>
+      </ul>
+      <div class="sbar"><div class="sdot"></div>Mempool: 247 txs · PoS ativo</div>
+    </div>
+    <div class="srv sb">
+      <div class="si">⛓</div>
+      <h3>4. Nó Blockchain</h3>
+      <p>Mantém ledger completo, constrói blocos e finaliza transações.</p>
+      <ul>
+        <li>Full node — ledger completo</li>
+        <li>Calcula SHA-256 / BLAKE3 dos blocos</li>
+        <li>Merkle Tree de transações por bloco</li>
+        <li>Propaga novo bloco via P2P gossip</li>
+        <li>Finalidade: ~12s (PoS) / 3,6s (PoR-Lite)</li>
+      </ul>
+      <div class="sbar"><div class="sdot"></div>Bloco: #21.847.392 · 12s/bloco</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:2rem">
+    <h3 style="font-size:.9rem;font-weight:600;margin-bottom:1rem;color:var(--o)">⚙ Fluxo de Dados entre Servidores</h3>
+    <div class="pipe-wrap">
+      <div class="pipe">
+        <div class="pnode" style="border-color:var(--q);color:var(--q)">Quantum Server<br><span style="font-size:.65rem;color:var(--txt2)">gera QRNG + par de chaves</span></div>
+        <div class="parr">⟶</div>
+        <div style="font-size:.68rem;color:var(--txt2);text-align:center">QKD · gRPC<br>~1 Mbps</div>
+        <div class="parr">⟶</div>
+        <div class="pnode" style="border-color:var(--g);color:var(--g)">QKD Node<br><span style="font-size:.65rem;color:var(--txt2)">distribui chave OTP</span></div>
+        <div class="parr">⟶</div>
+        <div style="font-size:.68rem;color:var(--txt2);text-align:center">TLS 1.3 Hybrid<br>Kyber+X25519</div>
+        <div class="parr">⟶</div>
+        <div class="pnode" style="border-color:var(--o);color:var(--o)">Validator Node<br><span style="font-size:.65rem;color:var(--txt2)">verifica assinatura</span></div>
+        <div class="parr">⟶</div>
+        <div style="font-size:.68rem;color:var(--txt2);text-align:center">libp2p gossip<br>P2P broadcast</div>
+        <div class="parr">⟶</div>
+        <div class="pnode" style="border-color:var(--b);color:var(--b)">Blockchain Node<br><span style="font-size:.65rem;color:var(--txt2)">minera/finaliza bloco</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;font-size:.72rem;color:var(--txt2);text-align:center">
+      <div>Payload: chave pública Kyber-1024 (1.568 bytes) + assinatura Dilithium-3 (2.420 bytes) + dados TX</div>
+      <div>Chave OTP encapsula payload · QBER &lt;11% obrigatório · Reconciliação de bits com hash SHA-256</div>
+      <div>SHA-256(bloco) &lt; alvo · Merkle Root de todas as TXs · Finalidade: 6 confirmações (~12s)</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- BANKS -->
+<section id="banks" class="info-sec">
+<div class="cnt">
+  <div class="sh">
+    <h2>🏦 Bancos com <em>Suporte a Computação Quântica</em></h2>
+    <p>Levantamento de instituições financeiras globais e brasileiras que utilizam ou pesquisam ativamente tecnologias quânticas — QKD, QRNG, PQC e computação quântica — em suas operações.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:2rem;border-color:rgba(0,245,255,.25)">
+    <div class="tag tq" style="margin-bottom:.8rem">🇧🇷 Brasil — Panorama Nacional</div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:1rem">O Brasil ainda está nas fases iniciais de adoção de tecnologias quânticas no setor financeiro, mas com iniciativas concretas. O <strong style="color:var(--txt)">BACEN</strong> lidera com o programa Drex (CBDC) que avalia criptografia pós-quântica. Bancos privados como <strong style="color:var(--txt)">Itaú e BTG Pactual</strong> investem em laboratórios de inovação com foco em computação quântica, enquanto <strong style="color:var(--txt)">Banco do Brasil e Bradesco</strong> participam de programas de pesquisa em parceria com universidades.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;font-size:.78rem">
+      <div style="background:#080820;border-radius:8px;padding:.6rem;text-align:center"><div style="font-size:.68rem;color:var(--txt2)">Estágio médio Brasil</div><div style="color:var(--o);font-weight:700">Pesquisa/Piloto</div></div>
+      <div style="background:#080820;border-radius:8px;padding:.6rem;text-align:center"><div style="font-size:.68rem;color:var(--txt2)">Regulação PQC (BACEN)</div><div style="color:var(--q);font-weight:700">Em consulta (2024)</div></div>
+      <div style="background:#080820;border-radius:8px;padding:.6rem;text-align:center"><div style="font-size:.68rem;color:var(--txt2)">CBDC Drex + PQC</div><div style="color:var(--g);font-weight:700">Fase 2 em andamento</div></div>
+      <div style="background:#080820;border-radius:8px;padding:.6rem;text-align:center"><div style="font-size:.68rem;color:var(--txt2)">Parcerias IBM Q / Google</div><div style="color:var(--b);font-weight:700">Itaú, BTG, BB</div></div>
+    </div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--q)">🇧🇷 Bancos Brasileiros</h3>
+  <div class="bank-cards" style="margin-bottom:2.5rem">
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇧🇷</div><div><div class="bbank">Banco Central do Brasil (BACEN)</div><div class="bctype">Banco Central · Regulador</div></div></div><p>Lidera o programa <strong>Drex</strong> (Real Digital / CBDC), avaliando criptografia pós-quântica para o protocolo. Publicou consulta sobre migração PQC em 2024 e participa do projeto BIS Innovation Hub para CBDCs quânticamente seguras.</p><div class="bcard-tags"><span class="tag tq">CBDC / Drex</span><span class="tag tg">PQC Research</span><span class="tag to">Regulação</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇧🇷</div><div><div class="bbank">Itaú Unibanco</div><div class="bctype">Banco Privado · Maior da América Latina</div></div></div><p>Opera o <strong>Cubo Itaú</strong> com foco em computação quântica. Parceria com <strong>IBM Quantum Network</strong> para pesquisa em modelagem de risco quântico e otimização de portfólios. Explora PQC para assinatura de transações digitais.</p><div class="bcard-tags"><span class="tag tq">IBM Quantum Partner</span><span class="tag tb">PQC Exploratório</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇧🇷</div><div><div class="bbank">BTG Pactual</div><div class="bctype">Banco de Investimento</div></div></div><p>Investe em computação quântica para <strong>pricing de derivativos</strong> e otimização de portfólios — algoritmos quânticos (QAOA/VQE) prometem speedup exponencial versus Monte Carlo clássico. Avalia integração com blockchain para liquidação quântica.</p><div class="bcard-tags"><span class="tag to">Quantum Finance</span><span class="tag tb">Blockchain</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇧🇷</div><div><div class="bbank">Banco do Brasil</div><div class="bctype">Banco Público</div></div></div><p>Participa do programa de pesquisa em computação quântica em parceria com universidades brasileiras (USP, UNICAMP). Explora aplicações em <strong>detecção de fraude</strong> com machine learning quântico e avalia PQC para canais digitais.</p><div class="bcard-tags"><span class="tag tb">Pesquisa Universitária</span><span class="tag to">Fraud Detection</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇧🇷</div><div><div class="bbank">Bradesco</div><div class="bctype">Banco Privado</div></div></div><p>Através do <strong>inovabra</strong>, explora computação quântica em parceria com startups e institutos de pesquisa. Estuda aplicações em otimização de crédito e análise de risco com algoritmos quânticos.</p><div class="bcard-tags"><span class="tag tb">inovabra Lab</span><span class="tag to">Exploratório</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇧🇷</div><div><div class="bbank">Nubank</div><div class="bctype">Fintech · Maior banco digital do mundo</div></div></div><p>Avalia criptografia pós-quântica para proteção de dados de clientes a longo prazo, alinhado com requisitos LGPD. Arquitetura cloud-native facilita migração para algoritmos PQC.</p><div class="bcard-tags"><span class="tag tg">PQC Planejado</span><span class="tag tq">Cloud-Native</span></div></div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--b)">🌎🌍🌏 Bancos Internacionais</h3>
+  <div class="bank-cards">
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇺🇸</div><div><div class="bbank">JPMorgan Chase</div><div class="bctype">Maior banco dos EUA</div></div></div><p>Opera a plataforma <strong>Onyx</strong> (blockchain Ethereum) que processa USD 1 tri/dia em repos. Membro fundador do <strong>IBM Quantum Network</strong>. Migra para PQC em produção.</p><div class="bcard-tags"><span class="tag tg">Blockchain Ativo</span><span class="tag tq">IBM Quantum</span><span class="tag tb">PQC Produção</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇺🇸</div><div><div class="bbank">Goldman Sachs</div><div class="bctype">Banco de Investimento</div></div></div><p>Pesquisa ativa em computação quântica para <strong>precificação de derivativos</strong> via Monte Carlo Quântico. Publicou paper demonstrando quadratic speedup em simulações financeiras (2023).</p><div class="bcard-tags"><span class="tag to">Quantum Finance</span><span class="tag tb">PQC Research</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇬🇧</div><div><div class="bbank">HSBC + Toshiba</div><div class="bctype">Banco Global · Parceria QKD</div></div></div><p>Realizou o primeiro <strong>piloto QKD bancário no Reino Unido</strong> em 2023, em parceria com Toshiba e BT. Transmitiu dados financeiros protegidos por QKD sobre fibra óptica em Londres.</p><div class="bcard-tags"><span class="tag tg">QKD Ativo</span><span class="tag tq">Fibra Óptica</span><span class="tag tb">Piloto Real</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇪🇸</div><div><div class="bbank">BBVA</div><div class="bctype">Banco Espanhol · Quantum Lab</div></div></div><p>Opera o <strong>BBVA Quantum Lab</strong>. Pesquisa criptografia lattice-based. Parceiro do programa Quantum Flagship da União Europeia. Publicou múltiplos papers sobre aplicações quânticas em finanças.</p><div class="bcard-tags"><span class="tag tq">Quantum Lab</span><span class="tag tb">Lattice Crypto</span><span class="tag tg">EU Quantum Flagship</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇨🇳</div><div><div class="bbank">Bank of China / ICBC</div><div class="bctype">Bancos Chineses</div></div></div><p>China lidera globalmente em QKD bancário. O <strong>satélite Micius</strong> demonstrou QKD Beijing–Viena para comunicações financeiras em 2017. Os maiores bancos chineses usam QKD da <strong>QuantumCTek</strong> em redes metropolitanas.</p><div class="bcard-tags"><span class="tag tg">QKD Produção</span><span class="tag tq">Satélite Micius</span><span class="tag tb">Líder Global</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇩🇰</div><div><div class="bbank">Banco Nacional da Dinamarca</div><div class="bctype">Banco Central Dinamarquês</div></div></div><p>Publicou o relatório <strong>"16 Danish Quantum Use Cases"</strong> (dezembro 2024). Participa do projeto Device-Independent QKD (DI-QKD) para CBDCs. Avalia quantum-safe criptografia para o sistema KRONOS.</p><div class="bcard-tags"><span class="tag tq">DI-QKD Research</span><span class="tag tb">CBDC Quântico</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇸🇬</div><div><div class="bbank">DBS Bank</div><div class="bctype">Maior banco de Singapura</div></div></div><p>Parceiro do <strong>National Quantum-Safe Network (NQSN+)</strong> de Singapura. Realiza transações financeiras protegidas por QKD desde 2022. Um dos líderes globais em implantação de QKD bancário metropolitano em escala real.</p><div class="bcard-tags"><span class="tag tg">QKD Metropolitano</span><span class="tag tq">NQSN+ Membro</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🇪🇺</div><div><div class="bbank">Banco Central Europeu (BCE/ECB)</div><div class="bctype">Banco Central da União Europeia</div></div></div><p>Pesquisa <strong>criptografia quântica para o Euro Digital</strong>. Participante do projeto EuroQCI — rede QKD que conectará todos os países da UE até 2027. Mandato para migração PQC em infraestrutura crítica até 2030.</p><div class="bcard-tags"><span class="tag tq">EuroQCI</span><span class="tag tg">Euro Digital</span><span class="tag tb">Mandato 2030</span></div></div>
+    <div class="bcard"><div class="bcard-top"><div class="bflag">🌐</div><div><div class="bbank">BIS Innovation Hub</div><div class="bctype">Bank for International Settlements</div></div></div><p>Coordena pesquisa global em <strong>CBDCs quânticamente seguras</strong>. Projetos: "Aurum" (CBDC + PQC), "Project mBridge" (cross-border CBDC). 93% dos bancos centrais pesquisando CBDC, maioria avaliando PQC.</p><div class="bcard-tags"><span class="tag tg">CBDC Global</span><span class="tag tq">PQC Standards</span><span class="tag tb">Coordenador</span></div></div>
+  </div>
+
+  <div class="btable-wrap" style="margin-top:2rem">
+    <h3 style="font-size:.95rem;font-weight:700;margin-bottom:1rem;color:var(--q)">Resumo — Nível de Maturidade por Instituição</h3>
+    <table>
+      <thead><tr><th>Banco</th><th>País</th><th>QKD</th><th>QRNG</th><th>PQC</th><th>Quantum Computing</th><th>Nível</th></tr></thead>
+      <tbody>
+        <tr><td class="bname">Bank of China / ICBC / PBOC</td><td>🇨🇳</td><td class="yes">● Produção</td><td class="yes">● Sim</td><td class="yes">● Sim</td><td class="par">● Pesquisa</td><td><span class="prog-badge pb-active">● Líder Global</span></td></tr>
+        <tr><td class="bname">DBS Bank (Singapura)</td><td>🇸🇬</td><td class="yes">● Metropolitano</td><td class="par">● Piloto</td><td class="yes">● Sim</td><td class="par">● Pesquisa</td><td><span class="prog-badge pb-active">● Ativo</span></td></tr>
+        <tr><td class="bname">HSBC + Toshiba</td><td>🇬🇧</td><td class="yes">● Piloto Real</td><td class="par">● Avaliação</td><td class="yes">● Sim</td><td class="par">● Parceria</td><td><span class="prog-badge pb-pilot">● Piloto</span></td></tr>
+        <tr><td class="bname">BBVA</td><td>🇪🇸</td><td class="par">● Pesquisa</td><td class="par">● Lab</td><td class="yes">● Sim</td><td class="yes">● Quantum Lab</td><td><span class="prog-badge pb-pilot">● Piloto</span></td></tr>
+        <tr><td class="bname">JPMorgan Chase</td><td>🇺🇸</td><td class="par">● Avaliação</td><td class="par">● Piloto</td><td class="yes">● Produção</td><td class="yes">● IBM Quantum</td><td><span class="prog-badge pb-pilot">● Piloto</span></td></tr>
+        <tr><td class="bname">Goldman Sachs</td><td>🇺🇸</td><td class="no">● Não</td><td class="par">● Avaliação</td><td class="par">● Pesquisa</td><td class="yes">● Ativo</td><td><span class="prog-badge pb-research">● Pesquisa</span></td></tr>
+        <tr><td class="bname">BCE / ECB</td><td>🇪🇺</td><td class="par">● EuroQCI</td><td class="par">● Planejado</td><td class="yes">● Mandato 2030</td><td class="par">● Pesquisa</td><td><span class="prog-badge pb-pilot">● Piloto</span></td></tr>
+        <tr><td class="bname">BACEN / Drex</td><td>🇧🇷</td><td class="no">● Não</td><td class="no">● Não</td><td class="par">● Consulta 2024</td><td class="par">● Exploratório</td><td><span class="prog-badge pb-research">● Pesquisa</span></td></tr>
+        <tr><td class="bname">Itaú Unibanco</td><td>🇧🇷</td><td class="no">● Não</td><td class="no">● Não</td><td class="par">● Exploratório</td><td class="par">● IBM Quantum</td><td><span class="prog-badge pb-research">● Pesquisa</span></td></tr>
+        <tr><td class="bname">BTG Pactual / BB / Bradesco</td><td>🇧🇷</td><td class="no">● Não</td><td class="no">● Não</td><td class="no">● Não</td><td class="par">● Exploratório</td><td><span class="prog-badge pb-planned">● Exploratório</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.7rem;color:var(--txt2);margin-top:.7rem">Fontes: Danish Business Authority (2024), BIS Reports, BBVA Research, Toshiba/HSBC Press Release (2023), DBS NQSN+ (2022), QuantumCTek (China).</p>
+  </div>
+</div>
+</section>
+
+<!-- HARDWARE QUÂNTICO REAL — D-WAVE & QUIP -->
+<section id="hardware" class="info-sec">
+<div class="cnt">
+  <div class="sh">
+    <h2>⚙ Hardware Quântico Real — <em>D-Wave & Ecossistema</em></h2>
+    <p>O estado atual do hardware quântico comercial e sua aplicação direta em blockchain — de sistemas de recozimento quântico a redes blockchain resistentes a ataques clássicos.</p>
+  </div>
+
+  <!-- D-Wave Advantage2 -->
+  <div class="hw-grid">
+    <div class="hw-card dw">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+        <div style="font-size:2rem">⚙</div>
+        <div>
+          <div style="font-size:.95rem;font-weight:800;color:#f7c59f">D-Wave Advantage2™</div>
+          <div style="font-size:.72rem;color:var(--txt2)">Processador Quântico de Recozimento</div>
+        </div>
+      </div>
+      <div class="hw-stats-row">
+        <div class="hw-stat"><div class="hw-sv">4.400+</div><div class="hw-sl">Qubits supercondutores</div></div>
+        <div class="hw-stat"><div class="hw-sv">20x</div><div class="hw-sl">Conectividade Zephyr</div></div>
+        <div class="hw-stat"><div class="hw-sv">−273°C</div><div class="hw-sl">Temperatura operacional</div></div>
+      </div>
+      <div class="hw-stats-row" style="margin-top:.5rem">
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--g)">75%</div><div class="hw-sl">Redução de ruído vs. anterior</div></div>
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--o)">40%</div><div class="hw-sl">Aumento na escala de energia</div></div>
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--b)">2×</div><div class="hw-sl">Melhoria de coerência</div></div>
+      </div>
+      <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;margin-top:.8rem">O Advantage2 usa a topologia <strong style="color:var(--txt)">Zephyr™</strong> com conectividade 20-way entre qubits, permitindo resolver problemas com até <strong style="color:var(--q)">2 milhões de variáveis</strong> quando integrado com solvers híbridos. Opera em dilution refrigerator a temperaturas abaixo do espaço interestelar.</p>
+      <div class="formula" style="font-size:.73rem">Tipo: Quantum Annealing (otimização combinatória)<br>Deploy: Leap Cloud (99,9% uptime · 40+ países) ou On-Premises<br>Referência: D-Wave Quantum Inc. (2026)</div>
+    </div>
+
+    <div class="hw-card quip">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+        <div style="font-size:2rem">🌐</div>
+        <div>
+          <div style="font-size:.95rem;font-weight:800;color:var(--q)">QUIP Network</div>
+          <div style="font-size:.72rem;color:var(--txt2)">Blockchain Quântico-Clássico · Testnet Abril 2026</div>
+        </div>
+      </div>
+      <div class="hw-stats-row">
+        <div class="hw-stat"><div class="hw-sv">13.000+</div><div class="hw-sl">Participantes testnet</div></div>
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--g)">300×</div><div class="hw-sl">Menos energia que PoW</div></div>
+        <div class="hw-stat"><div class="hw-sv">20k+</div><div class="hw-sl">Carteiras PQC deployadas</div></div>
+      </div>
+      <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;margin-top:.8rem">Desenvolvido pela <strong style="color:var(--txt)">Postquant Labs</strong> em consulta com a D-Wave, o QUIP Network usa <strong style="color:var(--q)">Proof of Useful Work (PoUW)</strong> — em vez de resolver puzzles arbitrários, os mineradores resolvem problemas reais de otimização, simulação e machine learning com valor comercial.</p>
+      <div style="margin-top:.8rem">
+        <div style="font-size:.72rem;color:var(--txt2);margin-bottom:.4rem">Compatibilidade cross-chain:</div>
+        <div class="quip-chain">
+          <span class="chain-badge cb-eth">Ethereum / EVM</span>
+          <span class="chain-badge cb-sol">Solana</span>
+          <span class="chain-badge cb-btc">Bitcoin</span>
+        </div>
+      </div>
+      <div class="formula" style="font-size:.73rem;margin-top:.8rem">PoUW vs PoW: ~300× menos energia · problemas economicamente úteis<br>Carteiras PQC já deployadas em EVM e Solana<br>Fonte: Postquant Labs / QUIP Network (Abril 2026)</div>
+    </div>
+
+    <div class="hw-card nature">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+        <div style="font-size:2rem">📄</div>
+        <div>
+          <div style="font-size:.95rem;font-weight:800;color:var(--g)">D-Wave · Blockchain Quântico</div>
+          <div style="font-size:.72rem;color:var(--txt2)">Physical Review A · "Proof of Quantum Work"</div>
+        </div>
+      </div>
+      <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;margin-bottom:.8rem">A D-Wave publicou pesquisa descrevendo uma arquitetura blockchain que usa <strong style="color:var(--txt)">computadores quânticos para geração e validação de hashes</strong>. O sistema mapeia funções matemáticas para spin glasses programáveis simulados nos computadores quânticos da D-Wave.</p>
+      <div class="hw-stats-row">
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--g)">4</div><div class="hw-sl">QCs distribuídos (CA + EUA)</div></div>
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--q)">1000s</div><div class="hw-sl">Blocos validados na demo</div></div>
+        <div class="hw-stat"><div class="hw-sv" style="color:var(--o)">↓↓↓</div><div class="hw-sl">Energia vs. PoW clássico</div></div>
+      </div>
+      <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;margin-top:.8rem">A demonstração executou o <strong style="color:var(--txt)">primeiro blockchain distribuído</strong> em quatro computadores quânticos baseados em nuvem localizados no Canadá e nos EUA. Os sistemas validaram cruzados entre si e mantiveram operação estável por milhares de blocos de transações, usando gerações arquiteturais diferentes.</p>
+      <div class="formula" style="font-size:.73rem">Segurança aprimorada: hashes quânticos criam barreiras a ataques clássicos<br>Eficiência: "fração da eletricidade" usada por recursos clássicos<br>Ref: D-Wave — "Blockchain with Proof of Quantum Work" · Physical Review A</div>
+    </div>
+  </div>
+
+  <!-- Comparativo D-Wave vs. Gate-based -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3 style="font-size:.95rem;font-weight:700;margin-bottom:1rem;color:var(--q)">Comparativo: Tipos de Hardware Quântico</h3>
+    <div class="btable-wrap">
+      <table class="ctable">
+        <thead><tr><th>Hardware</th><th>Empresa / Exemplo</th><th>Qubits (2026)</th><th>Melhor para</th><th>Temperatura</th><th>Blockchain</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Annealing Quântico</strong></td><td>D-Wave Advantage2</td><td class="yes">4.400+</td><td>Otimização, hashing</td><td>~15 mK</td><td class="yes">● Ativo (PoQW)</td></tr>
+          <tr><td><strong>Gate-based Supercondutor</strong></td><td>IBM Eagle / Google</td><td class="par">127–433</td><td>Algoritmos universais, QKD</td><td>~15 mK</td><td class="par">● Pesquisa</td></tr>
+          <tr><td><strong>Íons Aprisionados</strong></td><td>IonQ, Quantinuum</td><td class="par">32–56 lógicos</td><td>Alta fidelidade, PQC</td><td>~300 K (armadilha)</td><td class="par">● Pesquisa</td></tr>
+          <tr><td><strong>Fotônico</strong></td><td>PsiQuantum, Xanadu</td><td class="par">Variável</td><td>QKD, comunicação</td><td>Temperatura ambiente</td><td class="par">● Pesquisa</td></tr>
+          <tr><td><strong>Simulador Esparso</strong></td><td>Azure Quantum (Microsoft)</td><td class="yes">~1000+ simulados</td><td>Simulação de estados esparsos</td><td>Clássico (software)</td><td class="par">● Pesquisa/Dev</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.7rem;color:var(--txt2);margin-top:.6rem">Fontes: D-Wave Quantum (2026) · IBM Quantum · IonQ · Microsoft Azure Quantum Docs (2026). Ver <a href="examples.html" style="color:var(--q)">Exemplos → Azure Sparse Simulator</a> para detalhes do simulador.</p>
+  </div>
+
+  <!-- Scientific Reports reference -->
+  <div class="card" style="margin-top:1.5rem;border-color:rgba(46,204,113,.25)">
+    <div class="tag tg" style="margin-bottom:.8rem">📑 Literatura Científica — Scientific Reports (2025)</div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.65">O artigo <strong style="color:var(--txt)">DOI: 10.1038/s41598-025-16315-8</strong> (Scientific Reports, Nature group, 2025) trata de aplicações de computação quântica aplicada a sistemas blockchain. Este e outros trabalhos recentes consolidam a base científica para a integração prática de hardware quântico com protocolos de ledger distribuído, validando as abordagens de segurança apresentadas neste simulador.</p>
+    <div style="margin-top:.8rem;font-size:.75rem;color:var(--txt2)">Outros trabalhos base: Zhu (2025) · Danish Business Authority Quantum Use Cases (Dez. 2024) · NIST FIPS 203/204/205 (2024) · BIS Innovation Hub Reports · Jaques & Häner, arXiv:2105.01533 (sparse simulation)</div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>⚛ QuantumChain Simulator · <a href="index.html">← Voltar ao Simulador</a> · <a href="examples.html">🧪 Exemplos</a></p>
+  <p style="margin-top:.2rem">Fontes: Scientific Reports s41598-025-16315-8 (2025) · D-Wave Quantum (2026) · QUIP/Postquant Labs (2026) · Danish Business Authority (Dez. 2024) · NIST FIPS 203/204/205 (2024) · BIS · ECB · BBVA Research · Toshiba · QuantumCTek · Azure Quantum Docs</p>
+  <p style="margin-top:.2rem;font-size:.7rem">Simulações educacionais — hashes simplificados · Dados de mercado aproximados · Taxas simuladas</p>
+  <div class="researchers">
+    <span class="res-label">Pesquisadores</span>
+    <span class="res-item"><span class="res-role">Pesquisadora</span>Clarice Cleny</span>
+    <span class="res-sep">·</span>
+    <span class="res-item"><span class="res-role">Orientador</span>Prof. Sergio Vieira</span>
+  </div>
+</footer>
+
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Alternar modo claro/escuro">☀</button>
+<script src="info.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>

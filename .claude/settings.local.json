@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www-nature-com.translate.goog)",
+      "WebFetch(domain:www-dwavequantum-com.translate.goog)",
+      "WebFetch(domain:thequantuminsider.com)",
+      "WebFetch(domain:quip.network)",
+      "WebFetch(domain:www.nature.com)",
+      "Bash(wc -l /mnt/c/Users/sayuw/Downloads/quantum-blockchain-simulator/examples.html)",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\sayuw\\\\Downloads\\\\quantum-blockchain-simulator\\\\examples.html\"\\).Count)"
+    ]
+  }
+}

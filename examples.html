@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumChain — Exemplos</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('qc-theme')||'dark');</script>
+</head>
+<body class="pt">
+
+<nav>
+  <div class="logo">⚛ QuantumChain</div>
+  <div class="nav-links">
+    <a href="#azure">Azure Sparse Simulator</a>
+  </div>
+  <a href="index.html" class="nav-back">← Voltar ao Simulador</a>
+</nav>
+
+<!-- HERO -->
+<div class="ex-hero pt">
+  <h1>🧪 <em>Exemplos</em> Práticos</h1>
+  <p>Demonstrações reais de simuladores e ferramentas quânticas usadas na indústria — com código, visualizações interativas e referências diretas às documentações oficiais.</p>
+  <div class="toc" style="margin-top:1rem">
+    <a href="#azure">☁ Azure Sparse Simulator</a>
+    <a href="#dwave-quip">⚙ D-Wave & QUIP — Blockchain Industrial</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<section id="azure" style="padding:3.5rem 1.5rem">
+<div class="cnt">
+
+  <!-- Source & Date header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+    <div>
+      <h2 style="font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700">
+        ☁ Azure Quantum — <em style="font-style:normal;color:var(--q)">Simulador Esparso</em>
+      </h2>
+      <p style="color:var(--txt2);font-size:.86rem;margin-top:.4rem">Como funciona o sparse simulator da Microsoft e por que a Azure lidera em simulação quântica escalável.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.5rem;align-items:flex-end">
+      <div class="date-badge">
+        <span class="db-icon">📅</span>
+        <div>
+          <div class="db-label">Documentação Azure atualizada em</div>
+          <div class="db-date">12 de maio de 2026</div>
+        </div>
+      </div>
+      <div class="azure-badge">
+        <span>☁ Microsoft Azure Quantum</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- What is it -->
+  <div class="card" style="margin-bottom:1.5rem;border-color:rgba(0,245,255,.25)">
+    <div class="tag tq" style="margin-bottom:.8rem">O que é o Simulador Esparso?</div>
+    <p style="font-size:.88rem;color:var(--txt2);line-height:1.75;margin-bottom:1rem">
+      O simulador esparso utiliza uma <strong style="color:var(--txt)">representação esparsa de vetores de estado quântico</strong>. Um estado quântico <em>esparso</em> é aquele em que a maioria dos coeficientes de amplitude é zero. Em vez de alocar memória para todas as 2ⁿ amplitudes de um sistema de <em>n</em> qubits, o simulador armazena <strong style="color:var(--q)">apenas os estados com amplitude não-nula</strong>.
+    </p>
+    <p style="font-size:.88rem;color:var(--txt2);line-height:1.75;margin-bottom:1rem">
+      Isso permite que o simulador esparso <strong style="color:var(--g)">minimize drasticamente o uso de memória</strong>, habilitando simulações com um número muito maior de qubits do que um simulador de estado completo (full-state) conseguiria. Simuladores de estado completo desperdiçam memória e tempo em um número <em>exponencialmente grande</em> de amplitudes zero.
+    </p>
+    <div class="formula">Simulador Full-State:  memória = O(2ⁿ)  → inviável para n > ~50 qubits<br>Simulador Esparso:     memória = O(k)    → onde k = número de estados não-zero<br>Para estados com poucos termos não-nulos: k ≪ 2ⁿ  →  ganho exponencial</div>
+    <p style="font-size:.78rem;color:var(--txt2);margin-top:.8rem">Referência técnica: <strong style="color:var(--txt)">Jaques e Häner (arXiv:2105.01533)</strong> — base do algoritmo do simulador esparso do Azure QDK.</p>
+  </div>
+
+  <!-- Visual comparison: Sparse vs Full -->
+  <div style="margin-bottom:1.5rem">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--q)">Sparse vs. Full-State: Representação de Memória</h3>
+    <div class="compare-row">
+      <div class="compare-side sparse">
+        <h4>⚡ Simulador Esparso</h4>
+        <ul>
+          <li>Armazena apenas amplitudes ≠ 0</li>
+          <li>Eficiente para estados como Bell, GHZ e circuitos com poucos termos</li>
+          <li>Suporta simulação de 1000+ qubits em estados esparsos</li>
+          <li>Memória proporcional à complexidade do estado, não ao número de qubits</li>
+          <li>Padrão no QDK (VS Code Extension) desde 2024</li>
+          <li>Permite simular programas maiores com o mesmo hardware</li>
+        </ul>
+      </div>
+      <div class="compare-side full">
+        <h4>📦 Simulador Full-State</h4>
+        <ul>
+          <li>Armazena todas as 2ⁿ amplitudes, incluindo zeros</li>
+          <li>Preciso para qualquer estado quântico arbitrário</li>
+          <li>Limitado a ~50 qubits em hardware convencional</li>
+          <li>Memória cresce exponencialmente com n qubits</li>
+          <li>Melhor para programas que exploram superposição global</li>
+          <li>Necessário quando o estado não é esparso</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive sparse visualizer -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag tq" style="margin-bottom:.8rem">Visualização — Estado de Bell |Φ⁺⟩ (Esparso)</div>
+    <p style="font-size:.82rem;color:var(--txt2);margin-bottom:.8rem">O estado de Bell |Φ⁺⟩ = (1/√2)(|000⟩ + |111⟩) tem <strong style="color:var(--q)">apenas 2 de 8 amplitudes não-nulas</strong>. O simulador esparso armazena somente esses dois coeficientes — os 6 estados cinza não consomem memória.</p>
+    <canvas id="sparse-canvas" width="600" height="160" style="width:100%;background:#050515;border:1px solid var(--border);border-radius:10px;display:block"></canvas>
+    <p style="font-size:.72rem;color:var(--txt2);margin-top:.5rem;text-align:center">Estado de Bell de 3 qubits — barras azuis = amplitudes armazenadas · cinza = zeros (ignorados pelo simulador)</p>
+  </div>
+
+  <!-- How to run -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag tg" style="margin-bottom:.8rem">Como Executar o Simulador Esparso</div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:1rem">O simulador esparso é o <strong style="color:var(--txt)">simulador local padrão</strong> na extensão Microsoft Quantum Development Kit (QDK) para VS Code. Como chamá-lo depende do ambiente:</p>
+    <div class="btable-wrap">
+      <table class="noise-table">
+        <thead><tr><th>Ambiente</th><th>Como chamar o simulador esparso</th></tr></thead>
+        <tbody>
+          <tr><td>Arquivo Q# ou OpenQASM no VS Code</td><td>Execute o arquivo diretamente (padrão)</td></tr>
+          <tr><td>Python com biblioteca <code>qdk</code></td><td><code>qsharp.run</code> ou <code>openqasm.run</code> ou <code>qiskit.QSharpBackend</code></td></tr>
+          <tr><td>Notebook Jupyter (célula <code>%%qsharp</code>)</td><td>Chame a operação de entrada: <code>Main()</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- GHZ Code Example -->
+  <div style="margin-bottom:1.5rem">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--q)">Exemplo: Estado GHZ de 5 Qubits (sem ruído)</h3>
+    <div class="code-block">
+      <span class="cb-lang">Q#</span>
+<span class="kw">import</span> <span class="tp">Std.Diagnostics</span>.*;
+<span class="kw">import</span> <span class="tp">Std.Measurement</span>.*;
+
+<span class="kw">operation</span> <span class="fn">Main</span>() : <span class="tp">Result</span>[] {
+    <span class="kw">let</span> num = <span class="num">5</span>;
+    <span class="kw">return</span> <span class="fn">GHzSample</span>(num);
+}
+
+<span class="kw">operation</span> <span class="fn">GHzSample</span>(n: <span class="tp">Int</span>) : <span class="tp">Result</span>[] {
+    <span class="kw">use</span> qs = <span class="tp">Qubit</span>[n];
+    <span class="fn">H</span>(qs[<span class="num">0</span>]);               <span class="cm">// Superposição no qubit 0</span>
+    <span class="fn">ApplyCNOTChain</span>(qs);    <span class="cm">// Entrelaça todos os qubits</span>
+    <span class="kw">let</span> results = <span class="fn">MeasureEachZ</span>(qs);
+    <span class="fn">ResetAll</span>(qs);
+    <span class="kw">return</span> results;
+}
+    </div>
+    <p style="font-size:.78rem;color:var(--txt2);margin-top:.5rem">Resultado esperado: ~50% das medições em <strong style="color:var(--q)">|00000⟩</strong> e ~50% em <strong style="color:var(--b)">|11111⟩</strong> — comportamento típico de estado GHZ esparso.</p>
+    <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem">
+      <div>
+        <div style="font-size:.72rem;color:var(--txt2);margin-bottom:.3rem">Sem ruído (ideal)</div>
+        <div class="histogram" id="hist-no-noise" style="width:200px">
+          <div class="hbar" style="height:90%"></div><div class="hbar" style="height:5%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:3%"></div><div class="hbar" style="height:4%"></div>
+          <div class="hbar" style="height:3%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:3%"></div><div class="hbar" style="height:4%"></div>
+          <div class="hbar" style="height:3%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:3%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:3%"></div>
+          <div class="hbar" style="height:4%"></div><div class="hbar" style="height:90%"></div>
+        </div>
+        <div style="font-size:.65rem;color:var(--txt2);margin-top:.3rem;text-align:center">|00000⟩ ← estados → |11111⟩</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Noise Simulation -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag to" style="margin-bottom:.8rem">Simulação de Ruído Pauli no Simulador Esparso</div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.65;margin-bottom:1rem">O simulador esparso suporta a adição de <strong style="color:var(--txt)">ruído Pauli</strong> para simular os efeitos de decoerência em operações e medições quânticas reais. Use a função <code style="color:var(--q)">ConfigurePauliNoise</code> para definir probabilidades de erro em portas X, Y e Z.</p>
+
+    <!-- Noise with 1% bit-flip -->
+    <h4 style="font-size:.85rem;font-weight:700;color:var(--o);margin-bottom:.6rem">Exemplo: Adicionar 5% de Ruído de Bit-Flip (após alocação)</h4>
+    <div class="code-block">
+      <span class="cb-lang">Q#</span>
+<span class="kw">operation</span> <span class="fn">GHzSample</span>(n: <span class="tp">Int</span>) : <span class="tp">Result</span>[] {
+    <span class="kw">use</span> qs = <span class="tp">Qubit</span>[n];
+
+    <span class="cm">// 5% de ruído bit-flip aplicado a TODAS as operações</span>
+    <span class="fn">ConfigurePauliNoise</span>(<span class="num">0.05</span>, <span class="num">0.0</span>, <span class="num">0.0</span>);
+
+    <span class="fn">H</span>(qs[<span class="num">0</span>]);
+    <span class="fn">ApplyCNOTChain</span>(qs);
+    <span class="kw">let</span> results = <span class="fn">MeasureEachZ</span>(qs);
+    <span class="fn">ResetAll</span>(qs);
+    <span class="kw">return</span> results;
+}
+    </div>
+
+    <h4 style="font-size:.85rem;font-weight:700;color:var(--o);margin:.8rem 0 .6rem">Exemplo: Ruído apenas na medição</h4>
+    <div class="code-block">
+      <span class="cb-lang">Q#</span>
+<span class="kw">operation</span> <span class="fn">GHzSample</span>(n: <span class="tp">Int</span>) : <span class="tp">Result</span>[] {
+    <span class="kw">use</span> qs = <span class="tp">Qubit</span>[n];
+    <span class="fn">H</span>(qs[<span class="num">0</span>]);
+    <span class="fn">ApplyCNOTChain</span>(qs);
+
+    <span class="cm">// Ruído aplicado SOMENTE à operação de medição</span>
+    <span class="fn">ConfigurePauliNoise</span>(<span class="num">0.05</span>, <span class="num">0.0</span>, <span class="num">0.0</span>);
+
+    <span class="kw">let</span> results = <span class="fn">MeasureEachZ</span>(qs);
+    <span class="fn">ResetAll</span>(qs);
+    <span class="kw">return</span> results;
+}
+    </div>
+
+    <h4 style="font-size:.85rem;font-weight:700;color:var(--o);margin:.8rem 0 .6rem">Exemplo: Ruído segmentado por porta</h4>
+    <div class="code-block">
+      <span class="cb-lang">Q#</span>
+<span class="kw">operation</span> <span class="fn">GHzSample</span>(n: <span class="tp">Int</span>) : <span class="tp">Result</span>[] {
+    <span class="kw">use</span> qs = <span class="tp">Qubit</span>[n];
+
+    <span class="cm">// 5% bit-flip apenas na porta Hadamard</span>
+    <span class="fn">ConfigurePauliNoise</span>(<span class="num">0.05</span>, <span class="num">0.0</span>, <span class="num">0.0</span>);
+    <span class="fn">H</span>(qs[<span class="num">0</span>]);
+
+    <span class="cm">// Limpar ruído para o restante do circuito</span>
+    <span class="fn">ConfigurePauliNoise</span>(<span class="num">0.0</span>, <span class="num">0.0</span>, <span class="num">0.0</span>);
+
+    <span class="fn">ApplyCNOTChain</span>(qs);
+    <span class="kw">let</span> results = <span class="fn">MeasureEachZ</span>(qs);
+    <span class="fn">ResetAll</span>(qs);
+    <span class="kw">return</span> results;
+}
+    </div>
+
+    <!-- Effect of noise on histogram -->
+    <div style="margin-top:1rem">
+      <div style="font-size:.84rem;font-weight:600;color:var(--txt);margin-bottom:.8rem">Efeito visual do ruído no histograma:</div>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start">
+        <div>
+          <div style="font-size:.72rem;color:var(--g);margin-bottom:.3rem;font-weight:600">Sem ruído — 50/50 puro</div>
+          <div class="histogram" id="hist-no-noise-2" style="width:180px">
+            <div class="hbar" style="height:90%;background:#00f5ff"></div>
+            <div class="hbar" style="height:4%;background:#444468"></div><div class="hbar" style="height:3%;background:#444468"></div>
+            <div class="hbar" style="height:3%;background:#444468"></div><div class="hbar" style="height:4%;background:#444468"></div>
+            <div class="hbar" style="height:3%;background:#444468"></div><div class="hbar" style="height:4%;background:#444468"></div>
+            <div class="hbar" style="height:3%;background:#444468"></div><div class="hbar" style="height:3%;background:#444468"></div>
+            <div class="hbar" style="height:4%;background:#444468"></div><div class="hbar" style="height:3%;background:#444468"></div>
+            <div class="hbar" style="height:3%;background:#444468"></div><div class="hbar" style="height:4%;background:#444468"></div>
+            <div class="hbar" style="height:3%;background:#444468"></div><div class="hbar" style="height:4%;background:#444468"></div>
+            <div class="hbar" style="height:3%;background:#444468"></div><div class="hbar" style="height:3%;background:#444468"></div>
+            <div class="hbar" style="height:90%;background:#9b59b6"></div>
+          </div>
+          <div style="font-size:.65rem;color:var(--txt2);margin-top:.3rem;text-align:center">|000⟩ ←→ |111⟩</div>
+        </div>
+        <div>
+          <div style="font-size:.72rem;color:var(--o);margin-bottom:.3rem;font-weight:600">1% de ruído bit-flip</div>
+          <div class="histogram" id="hist-noise-1-2" style="width:180px">
+            <div class="hbar" style="height:80%;background:#00f5ff"></div>
+            <div class="hbar" style="height:7%;background:#f39c12"></div><div class="hbar" style="height:6%;background:#f39c12"></div>
+            <div class="hbar" style="height:6%;background:#f39c12"></div><div class="hbar" style="height:7%;background:#f39c12"></div>
+            <div class="hbar" style="height:6%;background:#f39c12"></div><div class="hbar" style="height:6%;background:#f39c12"></div>
+            <div class="hbar" style="height:7%;background:#f39c12"></div><div class="hbar" style="height:6%;background:#f39c12"></div>
+            <div class="hbar" style="height:6%;background:#f39c12"></div><div class="hbar" style="height:7%;background:#f39c12"></div>
+            <div class="hbar" style="height:6%;background:#f39c12"></div><div class="hbar" style="height:6%;background:#f39c12"></div>
+            <div class="hbar" style="height:7%;background:#f39c12"></div><div class="hbar" style="height:6%;background:#f39c12"></div>
+            <div class="hbar" style="height:6%;background:#f39c12"></div><div class="hbar" style="height:7%;background:#f39c12"></div>
+            <div class="hbar" style="height:75%;background:#9b59b6"></div>
+          </div>
+          <div style="font-size:.65rem;color:var(--txt2);margin-top:.3rem;text-align:center">Estados intermédios surgem</div>
+        </div>
+        <div>
+          <div style="font-size:.72rem;color:var(--r);margin-bottom:.3rem;font-weight:600">25% de ruído — distribuição aleatória</div>
+          <div class="histogram" id="hist-noise-25" style="width:180px">
+            <div class="hbar" style="background:#e74c3c"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+            <div class="hbar" style="background:#f39c12"></div><div class="hbar" style="background:#e74c3c"></div>
+          </div>
+          <div style="font-size:.65rem;color:var(--txt2);margin-top:.3rem;text-align:center">Indistinguível de ruído puro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Noise functions reference table -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag tb" style="margin-bottom:.8rem">Funções de Ruído Disponíveis — biblioteca Std.Diagnostics</div>
+    <div class="btable-wrap">
+      <table class="noise-table">
+        <thead>
+          <tr><th>Função</th><th>Descrição</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code style="color:var(--q)">ConfigurePauliNoise</code></td>
+            <td style="font-family:inherit;font-size:.79rem">Configura ruído Pauli X, Y e Z com probabilidades independentes. Aplica a todas as portas e medições subsequentes. Substitui configurações anteriores.</td>
+            <td><code>ConfigurePauliNoise(0.1, 0.0, 0.5)</code></td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--g)">BitFlipNoise</code></td>
+            <td style="font-family:inherit;font-size:.79rem">Configura apenas ruído de porta X (bit-flip) com a probabilidade especificada.</td>
+            <td><code>ConfigurePauliNoise(BitFlipNoise(0.1))</code><br><span style="font-size:.7rem;color:var(--txt2)">≡ ConfigurePauliNoise(0.1, 0.0, 0.0)</span></td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--b)">PhaseFlipNoise</code></td>
+            <td style="font-family:inherit;font-size:.79rem">Configura apenas ruído de porta Z (phase-flip) com a probabilidade especificada.</td>
+            <td><code>ConfigurePauliNoise(PhaseFlipNoise(0.1))</code><br><span style="font-size:.7rem;color:var(--txt2)">≡ ConfigurePauliNoise(0.0, 0.0, 0.1)</span></td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--o)">DepolarizingNoise</code></td>
+            <td style="font-family:inherit;font-size:.79rem">Configura ruído como porta X, Y ou Z com probabilidades iguais (despolarizante).</td>
+            <td><code>ConfigurePauliNoise(DepolarizingNoise(0.06))</code><br><span style="font-size:.7rem;color:var(--txt2)">≡ ConfigurePauliNoise(0.2, 0.2, 0.2)</span></td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--r)">NoNoise</code></td>
+            <td style="font-family:inherit;font-size:.79rem">Redefine o modelo de ruído para zero (sem ruído). Útil para limpar configurações anteriores.</td>
+            <td><code>ConfigurePauliNoise(NoNoise())</code><br><span style="font-size:.7rem;color:var(--txt2)">≡ ConfigurePauliNoise(0.0, 0.0, 0.0)</span></td>
+          </tr>
+          <tr>
+            <td><code style="color:var(--txt)">ApplyIdleNoise</code></td>
+            <td style="font-family:inherit;font-size:.79rem">Aplica o ruído configurado manualmente a um único qubit específico durante a simulação.</td>
+            <td><code>ConfigurePauliNoise(0.1, 0.0, 0.0);<br>ApplyIdleNoise(q[0]);</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Azure context -->
+  <div class="card" style="border-color:rgba(0,120,212,.35)">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+      <div style="font-size:1.8rem">☁</div>
+      <div>
+        <div style="font-size:.95rem;font-weight:700;color:#4fc3f7">Azure Quantum e Simulação Esparsa</div>
+        <div style="font-size:.72rem;color:var(--txt2)">Microsoft Azure — plataforma líder em simulação quântica em nuvem</div>
+      </div>
+    </div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.7;margin-bottom:1rem">A <strong style="color:var(--txt)">Microsoft Azure Quantum</strong> disponibiliza o simulador esparso como o simulador local padrão do QDK, mas também oferece acesso a hardware quântico real e simuladores em nuvem via plataforma Azure. O ecossistema suporta múltiplos provedores:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-bottom:1rem">
+      <div style="background:#080820;border:1px solid rgba(0,120,212,.3);border-radius:8px;padding:.7rem;text-align:center">
+        <div style="font-size:.8rem;font-weight:700;color:#4fc3f7">Simulador Esparso</div>
+        <div style="font-size:.68rem;color:var(--txt2);margin-top:.2rem">QDK Local · Padrão · Gratuito</div>
+      </div>
+      <div style="background:#080820;border:1px solid rgba(0,245,255,.2);border-radius:8px;padding:.7rem;text-align:center">
+        <div style="font-size:.8rem;font-weight:700;color:var(--q)">IonQ</div>
+        <div style="font-size:.68rem;color:var(--txt2);margin-top:.2rem">Íons aprisionados · 32 qubits</div>
+      </div>
+      <div style="background:#080820;border:1px solid rgba(155,89,182,.2);border-radius:8px;padding:.7rem;text-align:center">
+        <div style="font-size:.8rem;font-weight:700;color:var(--b)">Quantinuum</div>
+        <div style="font-size:.68rem;color:var(--txt2);margin-top:.2rem">Alta fidelidade · H-Series</div>
+      </div>
+      <div style="background:#080820;border:1px solid rgba(243,156,18,.2);border-radius:8px;padding:.7rem;text-align:center">
+        <div style="font-size:.8rem;font-weight:700;color:var(--o)">Rigetti</div>
+        <div style="font-size:.68rem;color:var(--txt2);margin-top:.2rem">Supercondutor · Ankaa-series</div>
+      </div>
+    </div>
+    <div class="formula" style="font-size:.75rem">O simulador esparso é ideal para: pesquisa em criptografia quântica (QKD, PQC), desenvolvimento de algoritmos blockchain quânticos,<br>testes de circuitos com estados de Bell / GHZ, e prototipagem de sistemas como o demonstrado neste QuantumChain Simulator.</div>
+    <div style="margin-top:.8rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+      <div class="date-badge" style="margin-bottom:0">
+        <span class="db-icon">📅</span>
+        <div>
+          <div class="db-label">Última atualização da documentação</div>
+          <div class="db-date">12 de maio de 2026</div>
+        </div>
+      </div>
+      <div class="azure-badge">
+        <span>learn.microsoft.com/azure/quantum/sparse-simulator</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- SEÇÃO 2: D-WAVE & QUIP NETWORK — BLOCKCHAIN INDUSTRIAL       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="dwave-quip" style="padding:3.5rem 1.5rem;background:var(--bg2)">
+<div class="cnt">
+
+  <!-- Header -->
+  <div style="margin-bottom:2rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div>
+        <h2 style="font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700">
+          ⚙ D-Wave & QUIP Network — <em style="font-style:normal;color:var(--q)">Blockchain Quântico Industrial</em>
+        </h2>
+        <p style="color:var(--txt2);font-size:.86rem;margin-top:.4rem;max-width:600px;line-height:1.6">Como os computadores quânticos da D-Wave atuam em transações blockchain reais, o papel da QUIP Network, empresas parceiras, e quais sistemas de transmissão cada camada utiliza.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.5rem;align-items:flex-end">
+        <div class="date-badge">
+          <span class="db-icon">📅</span>
+          <div>
+            <div class="db-label">Fontes consultadas em</div>
+            <div class="db-date">Abril–Maio 2026</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+          <div class="azure-badge" style="background:rgba(255,107,53,.1);border-color:rgba(255,107,53,.4)"><span style="color:#f7c59f">⚙ D-Wave Quantum</span></div>
+          <div class="azure-badge" style="background:rgba(155,89,182,.1);border-color:rgba(155,89,182,.4)"><span style="color:var(--b)">🌐 QUIP Network</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 1. COMO D-WAVE ATUA EM TRANSAÇÕES ── -->
+  <div class="card" style="margin-bottom:1.5rem;border-color:rgba(247,197,159,.25)">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+      <span style="font-size:1.6rem">⚙</span>
+      <div>
+        <div style="font-size:.95rem;font-weight:700;color:#f7c59f">D-Wave — Proof of Quantum Work (PoQW)</div>
+        <div style="font-size:.72rem;color:var(--txt2)">Publicado em Physical Review A · Primeiro demo distribuído com 4 QPUs (Canadá + EUA)</div>
+      </div>
+    </div>
+
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.7;margin-bottom:1rem">
+      A abordagem da D-Wave substitui o hashing clássico (SHA-256) por <strong style="color:#f7c59f">hashes gerados e validados por computação quântica</strong>. Em vez de usar CPU/GPU para resolver puzzles arbitrários de proof-of-work, o sistema mapeia funções matemáticas para <strong style="color:var(--txt)">spin glasses programáveis</strong> simulados nos QPUs de recozimento quântico — criando um hash que só pode ser gerado e verificado eficientemente por hardware quântico.
+    </p>
+
+    <!-- Transaction flow D-Wave -->
+    <div style="margin-bottom:1.2rem">
+      <div style="font-size:.82rem;font-weight:600;color:#f7c59f;margin-bottom:.9rem">Fluxo de uma Transação com PoQW (Proof of Quantum Work):</div>
+      <div class="arch-flow" style="justify-content:flex-start;flex-wrap:wrap;gap:.5rem">
+        <div class="an" style="border-color:#f7c59f;background:rgba(247,197,159,.05);min-width:115px">
+          <div class="ai">📝</div>
+          <div class="at" style="color:#f7c59f">1. Dados TX</div>
+          <div class="ad">Transação criada<br>pelo usuário/banco</div>
+        </div>
+        <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,#f7c59f,var(--q))"></div><div style="font-size:.58rem;color:var(--txt2)">HTTPS/TLS</div></div>
+        <div class="an" style="border-color:var(--q);background:rgba(0,245,255,.04);min-width:115px">
+          <div class="ai">☁</div>
+          <div class="at" style="color:var(--q)">2. Leap Cloud</div>
+          <div class="ad">API D-Wave<br>40+ países</div>
+        </div>
+        <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,var(--q),#f7c59f)"></div><div style="font-size:.58rem;color:var(--txt2)">gRPC / REST</div></div>
+        <div class="an" style="border-color:#f7c59f;background:rgba(247,197,159,.05);min-width:115px">
+          <div class="ai">⚙</div>
+          <div class="at" style="color:#f7c59f">3. QPU Annealing</div>
+          <div class="ad">Advantage2™<br>4.400+ qubits · 15mK</div>
+        </div>
+        <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,#f7c59f,var(--g))"></div><div style="font-size:.58rem;color:var(--txt2)">Hash quântico</div></div>
+        <div class="an" style="border-color:var(--g);background:rgba(46,204,113,.04);min-width:115px">
+          <div class="ai">🔐</div>
+          <div class="at" style="color:var(--g)">4. Hash PoQW</div>
+          <div class="ad">Resultado único<br>verificável por QC</div>
+        </div>
+        <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,var(--g),var(--b))"></div><div style="font-size:.58rem;color:var(--txt2)">P2P gossip</div></div>
+        <div class="an" style="border-color:var(--b);background:rgba(155,89,182,.04);min-width:115px">
+          <div class="ai">⛓</div>
+          <div class="at" style="color:var(--b)">5. Bloco Validado</div>
+          <div class="ad">Rede blockchain<br>cross-valida</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula" style="font-size:.75rem">
+      Hash clássico (PoW):   SHA256(dados || nonce) &lt; target   →  resolvido por CPU/GPU/ASIC<br>
+      Hash quântico (PoQW):  QPU mapeia dados → spin-glass → estado de mínima energia → hash único<br>
+      Segurança extra: hash só pode ser forjado/revertido com acesso a hardware quântico annealing equivalente
+    </div>
+
+    <!-- Demo numbers -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin-top:1rem">
+      <div class="hw-stat"><div class="hw-sv" style="color:#f7c59f">4</div><div class="hw-sl">QPUs em demo distribuída<br>(CA + EUA via cloud)</div></div>
+      <div class="hw-stat"><div class="hw-sv" style="color:var(--g)">1000s</div><div class="hw-sl">Blocos validados<br>cruzadamente</div></div>
+      <div class="hw-stat"><div class="hw-sv" style="color:var(--q)">&lt;1s</div><div class="hw-sl">Tempo de resposta<br>do QPU (Leap)</div></div>
+      <div class="hw-stat"><div class="hw-sv" style="color:var(--o)">↓↓↓</div><div class="hw-sl">Energia vs. PoW<br>clássico (Bitcoin)</div></div>
+    </div>
+  </div>
+
+  <!-- ── 2. COMO QUIP NETWORK PROCESSA TRANSAÇÕES ── -->
+  <div class="card" style="margin-bottom:1.5rem;border-color:rgba(155,89,182,.35)">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+      <span style="font-size:1.6rem">🌐</span>
+      <div>
+        <div style="font-size:.95rem;font-weight:700;color:var(--b)">QUIP Network — Proof of Useful Work (PoUW)</div>
+        <div style="font-size:.72rem;color:var(--txt2)">Postquant Labs · Testnet lançado em 2 de abril de 2026 · 13.000+ participantes</div>
+      </div>
+    </div>
+
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.7;margin-bottom:1rem">
+      A QUIP Network opera em <strong style="color:var(--b)">duas camadas independentes</strong>: uma camada de consenso-computação onde mineradores resolvem problemas reais usando QPUs, e uma camada de ativos onde carteiras existentes (MetaMask, Ledger, Trezor etc.) são protegidas com <strong style="color:var(--txt)">assinaturas pós-quânticas</strong>. Em vez de puzzles sem utilidade, o PoUW resolve problemas de <strong style="color:var(--q)">otimização, simulação e machine learning</strong> com valor comercial real.
+    </p>
+
+    <!-- Duas camadas QUIP -->
+    <div class="compare-row" style="margin-bottom:1.2rem">
+      <div style="background:#080820;border:1px solid rgba(155,89,182,.35);border-radius:10px;padding:1rem">
+        <div style="font-size:.82rem;font-weight:700;color:var(--b);margin-bottom:.6rem">⛏ Camada 1 — Compute-Consensus</div>
+        <ul style="list-style:none">
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--b)">▸</span>Mineradores submetem soluções de otimização real</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--b)">▸</span>D-Wave Advantage2 compete com CPUs, GPUs e ASICs</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--b)">▸</span>Reward em tokens QUIP (crédito de computação)</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--b)">▸</span>~300× menos energia que PoW clássico (Bitcoin)</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--b)">▸</span>Problemas: roteamento, portfólios, química, ML</li>
+        </ul>
+      </div>
+      <div style="background:#080820;border:1px solid rgba(0,245,255,.25);border-radius:10px;padding:1rem">
+        <div style="font-size:.82rem;font-weight:700;color:var(--q);margin-bottom:.6rem">🔐 Camada 2 — Asset Layer (PQC)</div>
+        <ul style="list-style:none">
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Carteiras existentes ganham assinatura pós-quântica</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Co-signatário quântico-resistente em cada TX</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>20.000+ carteiras PQC deployadas (EVM + Solana)</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Proteção "harvest now, decrypt later"</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.2rem 0 .2rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Bitcoin, Solana, EVM em roadmap</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Fluxo QUIP -->
+    <div style="font-size:.82rem;font-weight:600;color:var(--b);margin-bottom:.9rem">Fluxo de Transação QUIP Network (camada de ativos):</div>
+    <div class="arch-flow" style="justify-content:flex-start;flex-wrap:wrap;gap:.5rem">
+      <div class="an" style="border-color:var(--txt2);min-width:110px">
+        <div class="ai">👛</div>
+        <div class="at">1. Carteira</div>
+        <div class="ad">MetaMask / Ledger<br>Trezor / Safe</div>
+      </div>
+      <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,var(--txt2),var(--b))"></div><div style="font-size:.58rem;color:var(--txt2)">TX original</div></div>
+      <div class="an" style="border-color:var(--b);background:rgba(155,89,182,.05);min-width:110px">
+        <div class="ai">🔐</div>
+        <div class="at" style="color:var(--b)">2. Co-signer PQC</div>
+        <div class="ad">Assinatura PQC<br>(Dilithium/Kyber)</div>
+      </div>
+      <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,var(--b),var(--q))"></div><div style="font-size:.58rem;color:var(--txt2)">P2P gossip</div></div>
+      <div class="an" style="border-color:var(--q);background:rgba(0,245,255,.04);min-width:110px">
+        <div class="ai">🌐</div>
+        <div class="at" style="color:var(--q)">3. Rede QUIP</div>
+        <div class="ad">Nós validadores<br>PoUW consensus</div>
+      </div>
+      <div class="aline"><div class="flowline" style="background:linear-gradient(90deg,var(--q),var(--g))"></div><div style="font-size:.58rem;color:var(--txt2)">Bridge contrato</div></div>
+      <div class="an" style="border-color:var(--g);background:rgba(46,204,113,.04);min-width:110px">
+        <div class="ai">⛓</div>
+        <div class="at" style="color:var(--g)">4. Blockchain Alvo</div>
+        <div class="ad">EVM / Solana<br>Bitcoin</div>
+      </div>
+    </div>
+
+    <div class="formula" style="font-size:.75rem;margin-top:1rem">
+      TX original  +  co-assinatura PQC (Dilithium-3 / Kyber-1024)  →  propagada na rede P2P<br>
+      Mineradores PoUW resolvem problema de otimização → recebem QUIP tokens<br>
+      Proteção: mesmo que QC futuro quebre ECDSA, a assinatura PQC extra garante a TX
+    </div>
+  </div>
+
+  <!-- ── 3. SISTEMAS DE TRANSMISSÃO ── -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag tq" style="margin-bottom:1rem">🌐 Sistemas de Transmissão — D-Wave & QUIP vs. QKD Tradicional</div>
+
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.7;margin-bottom:1.2rem">
+      É importante entender que a D-Wave e a QUIP Network utilizam <strong style="color:var(--txt)">infraestrutura clássica de internet</strong> como meio de transmissão — o diferencial quântico está na <em>computação</em> (hashing e otimização via QPU) e na <em>criptografia</em> (PQC), não no canal físico de comunicação. Isso contrasta com sistemas QKD que utilizam fibra óptica quântica ou satélites para distribuição de chaves.
+    </p>
+
+    <div class="btable-wrap">
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th>Sistema</th>
+            <th>Canal Físico</th>
+            <th>Protocolo</th>
+            <th>Segurança Quântica</th>
+            <th>Distância</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:#f7c59f">D-Wave Leap Cloud</strong></td>
+            <td>Internet · TCP/IP</td>
+            <td>HTTPS / TLS 1.3<br><span style="font-size:.68rem;color:var(--txt2)">gRPC para QPU API</span></td>
+            <td class="par">● PQC (migração)<br><span style="font-size:.68rem">SOC 2 Type 2</span></td>
+            <td>Global (40+ países)</td>
+            <td class="yes">● Produção</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#f7c59f">D-Wave On-Premises</strong></td>
+            <td>Rede local · LAN/WAN</td>
+            <td>TCP/IP interno<br><span style="font-size:.68rem;color:var(--txt2)">Integração HPC</span></td>
+            <td class="par">● Configurável</td>
+            <td>Local / Datacenter</td>
+            <td class="yes">● Disponível</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--b)">QUIP Network (nós)</strong></td>
+            <td>Internet · P2P</td>
+            <td>P2P gossip<br><span style="font-size:.68rem;color:var(--txt2)">Similar ao Ethereum</span></td>
+            <td class="yes">● PQC ativa<br><span style="font-size:.68rem">Dilithium + Kyber</span></td>
+            <td>Global (sem fronteira)</td>
+            <td class="par">● Testnet (2026)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--b)">QUIP Carteiras PQC</strong></td>
+            <td>Internet / App</td>
+            <td>PQC co-assinatura<br><span style="font-size:.68rem;color:var(--txt2)">EVM · Solana · Bitcoin</span></td>
+            <td class="yes">● PQC nativa<br><span style="font-size:.68rem">20k+ wallets</span></td>
+            <td>Global</td>
+            <td class="yes">● Deploy ativo</td>
+          </tr>
+          <tr style="background:rgba(0,245,255,.03)">
+            <td><strong style="color:var(--q)">QKD · Fibra Óptica</strong><br><span style="font-size:.68rem;color:var(--txt2)">(ex: HSBC+Toshiba, DBS)</span></td>
+            <td><strong style="color:var(--q)">Fibra quântica</strong><br>λ=1550nm, fótons</td>
+            <td>BB84 / E91<br><span style="font-size:.68rem;color:var(--txt2)">OTP + autenticação</span></td>
+            <td class="yes">● Incondicional<br><span style="font-size:.68rem">QBER &lt;11%</span></td>
+            <td>300–600 km</td>
+            <td class="par">● Piloto/Produção</td>
+          </tr>
+          <tr style="background:rgba(0,245,255,.03)">
+            <td><strong style="color:var(--q)">QKD · Satélite</strong><br><span style="font-size:.68rem;color:var(--txt2)">(ex: Micius — China)</span></td>
+            <td><strong style="color:var(--q)">Canal óptico LEO</strong><br>~500km altitude</td>
+            <td>Entrelaçamento<br><span style="font-size:.68rem;color:var(--txt2)">Nó confiável intermediário</span></td>
+            <td class="yes">● Incondicional*</td>
+            <td>Intercontinental</td>
+            <td class="par">● Pesquisa</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.71rem;color:var(--txt2);margin-top:.7rem">* QKD via satélite com "trusted node" — segurança depende da integridade física do satélite. D-Wave/QUIP: segurança via complexidade computacional quântica (PoQW) e criptografia pós-quântica (PQC), não via canal quântico físico.</p>
+  </div>
+
+  <!-- ── 4. ECOSSISTEMA DE PARCEIROS ── -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="tag tb" style="margin-bottom:1rem">🤝 Ecossistema de Parceiros & Empresas Integradas</div>
+    <p style="font-size:.84rem;color:var(--txt2);line-height:1.7;margin-bottom:1.2rem">O ecossistema D-Wave + QUIP abrange desde provedores de hardware quântico até integrações com carteiras cripto populares, ex-equipes de grandes empresas de tecnologia e finanças, e empresas que acessam computação quântica como serviço para otimização industrial.</p>
+
+    <div class="hw-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+
+      <!-- D-Wave parceiros hardware/cloud -->
+      <div style="background:#080820;border:1px solid rgba(247,197,159,.25);border-radius:12px;padding:1.1rem">
+        <div style="font-size:.8rem;font-weight:700;color:#f7c59f;margin-bottom:.7rem">⚙ D-Wave — Hardware & Cloud</div>
+        <ul style="list-style:none">
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">Leap Cloud Service</strong> — acesso cloud em 40+ países</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">Postquant Labs</strong> — parceiro fundador do QUIP Network</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">Volkswagen</strong> — otimização de roteamento de tráfego</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">Deloitte</strong> — consultoria e otimização de supply chain</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">NTT / NEC / Fujitsu</strong> — telecomunicações e fabricação</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">DENSO</strong> — otimização de produção automotiva</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:#f7c59f">▸</span><strong style="color:var(--txt)">Los Alamos National Lab</strong> — pesquisa científica</li>
+        </ul>
+        <div style="font-size:.69rem;color:var(--txt2);margin-top:.6rem;padding:.5rem;background:#050515;border-radius:6px">Setores: manufatura · logística · finanças · pesquisa · setor público</div>
+      </div>
+
+      <!-- QUIP parceiros carteiras -->
+      <div style="background:#080820;border:1px solid rgba(155,89,182,.3);border-radius:12px;padding:1.1rem">
+        <div style="font-size:.8rem;font-weight:700;color:var(--b);margin-bottom:.7rem">🔐 QUIP — Carteiras & Integrações PQC</div>
+        <div style="font-size:.73rem;color:var(--txt2);margin-bottom:.6rem">Carteiras que recebem co-assinatura PQC via QUIP Asset Layer:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.8rem">
+          <span class="chain-badge" style="border-color:var(--o);color:var(--o);background:rgba(243,156,18,.1)">MetaMask</span>
+          <span class="chain-badge" style="border-color:#4fc3f7;color:#4fc3f7;background:rgba(79,195,247,.1)">Ledger</span>
+          <span class="chain-badge" style="border-color:var(--g);color:var(--g);background:rgba(46,204,113,.1)">Trezor</span>
+          <span class="chain-badge" style="border-color:var(--b);color:var(--b);background:rgba(155,89,182,.1)">Safe</span>
+          <span class="chain-badge" style="border-color:#9945ff;color:#9945ff;background:rgba(153,69,255,.1)">Phantom</span>
+          <span class="chain-badge" style="border-color:var(--q);color:var(--q);background:rgba(0,245,255,.08)">WalletConnect</span>
+          <span class="chain-badge" style="border-color:#627eea;color:#627eea;background:rgba(98,126,234,.1)">Privy</span>
+          <span class="chain-badge" style="border-color:var(--txt2);color:var(--txt2);background:rgba(136,136,170,.08)">Squads</span>
+        </div>
+        <div style="font-size:.73rem;color:var(--txt2);margin-bottom:.4rem">Background da equipe Postquant Labs — ex-colaboradores de:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.3rem">
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">0x / Matcha</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">Parity / Polkadot</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">Intel</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">IBM</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">Standard Chartered</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">Booking.com</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">Tata Consultancy</span>
+          <span style="font-size:.68rem;color:var(--txt2);background:#050515;border:1px solid var(--border);border-radius:4px;padding:.15rem .45rem">xx Network</span>
+        </div>
+      </div>
+
+      <!-- QUIP blockchain redes -->
+      <div style="background:#080820;border:1px solid rgba(0,245,255,.2);border-radius:12px;padding:1.1rem">
+        <div style="font-size:.8rem;font-weight:700;color:var(--q);margin-bottom:.7rem">⛓ Redes Blockchain Suportadas</div>
+        <div style="margin-bottom:.8rem">
+          <div style="font-size:.73rem;color:var(--txt2);margin-bottom:.4rem">Cross-chain ativo ou em roadmap:</div>
+          <div class="quip-chain">
+            <span class="chain-badge cb-eth">Ethereum / EVM</span>
+            <span class="chain-badge cb-sol">Solana</span>
+            <span class="chain-badge cb-btc">Bitcoin</span>
+          </div>
+        </div>
+        <ul style="list-style:none">
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Usuários mantêm ativos nas redes originais</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Bridge contracts para comunicação cross-chain</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Tokens QUIP: crédito de computação quântica</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Marketplace spot-rate de QPU (sem contrato mínimo)</li>
+          <li style="font-size:.76rem;color:var(--txt2);padding:.22rem 0 .22rem 1rem;position:relative;line-height:1.5"><span style="position:absolute;left:0;color:var(--q)">▸</span>Participantes: QPU · CPU · GPU · ASIC</li>
+        </ul>
+        <div class="formula" style="font-size:.7rem;margin-top:.7rem">Eliminação da reserva mínima de USD 30.000+<br>para acesso a QPU → modelo spot democratizado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. COMPARATIVO FINAL ── -->
+  <div class="card">
+    <div class="tag tg" style="margin-bottom:1rem">📊 Abordagens de Segurança Quântica em Transações — Comparativo</div>
+    <div class="btable-wrap">
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th>Abordagem</th>
+            <th>Quem usa</th>
+            <th>Como protege</th>
+            <th>Transmissão física</th>
+            <th>PQC?</th>
+            <th>QKD?</th>
+            <th>Maturidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:#f7c59f">PoQW — D-Wave</strong></td>
+            <td>QUIP Network, pesquisa blockchain</td>
+            <td>Hash gerado por QPU — inforjável sem hardware quântico equivalente</td>
+            <td>Internet (HTTPS · Leap Cloud)</td>
+            <td class="par">● Migração</td>
+            <td class="no">● Não</td>
+            <td><span class="prog-badge pb-research">● Pesquisa</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--b)">PoUW + PQC — QUIP</strong></td>
+            <td>20k+ carteiras, EVM/Solana</td>
+            <td>Co-assinatura PQC em cada TX (Dilithium/Kyber) + mineração útil</td>
+            <td>Internet P2P (gossip protocol)</td>
+            <td class="yes">● Ativa (deploy)</td>
+            <td class="no">● Não</td>
+            <td><span class="prog-badge pb-pilot">● Testnet</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--q)">QKD · Fibra</strong></td>
+            <td>HSBC+Toshiba, DBS, China (PBOC)</td>
+            <td>Chaves OTP via fótons — segurança física incondicional (BB84)</td>
+            <td><strong style="color:var(--q)">Fibra óptica quântica</strong> (λ=1550nm)</td>
+            <td class="par">● Combinado</td>
+            <td class="yes">● Nativa</td>
+            <td><span class="prog-badge pb-pilot">● Piloto/Prod.</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--q)">QKD · Satélite</strong></td>
+            <td>China (Micius), pesquisa EU</td>
+            <td>Distribuição de chaves intercontinental via fótons entrelaçados</td>
+            <td><strong style="color:var(--q)">Canal óptico LEO</strong> (~500km)</td>
+            <td class="par">● Combinado</td>
+            <td class="yes">● Nativa</td>
+            <td><span class="prog-badge pb-research">● Pesquisa</span></td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--b)">TLS-PQC Híbrido</strong></td>
+            <td>JPMorgan, Google, bancos em geral</td>
+            <td>Kyber-1024 + X25519 no handshake TLS 1.3 — resistência computacional</td>
+            <td>Internet (TCP/IP · fibra clássica)</td>
+            <td class="yes">● Nativa (NIST)</td>
+            <td class="no">● Não</td>
+            <td><span class="prog-badge pb-active">● Produção</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.71rem;color:var(--txt2);margin-top:.8rem;line-height:1.6">
+      <strong style="color:var(--txt)">Resumo:</strong> D-Wave e QUIP Network protegem via <em>computação quântica</em> (geração de hash) e <em>criptografia pós-quântica</em> (PQC), transmitindo por <strong>internet clássica</strong>. Sistemas QKD (bancos como HSBC, DBS, PBOC) usam <strong>canais quânticos físicos</strong> (fibra/satélite) para distribuição de chaves. As duas abordagens são complementares — o ideal a longo prazo é combinar PoQW/PQC (disponível hoje) com QKD (em escala global futura).
+    </p>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <p>⚛ QuantumChain Simulator · <a href="index.html">← Voltar ao Simulador</a> · <a href="info.html">📚 Informações Técnicas</a></p>
+  <p style="margin-top:.2rem">Fontes: Microsoft Azure Quantum Docs (12/05/2026) · D-Wave Quantum — blockchain.dwavequantum.com (2026) · D-Wave Systems — dwavequantum.com/solutions-and-products/systems (2026) · QUIP Network — quip.network (2026) · The Quantum Insider (02/04/2026) · Jaques & Häner arXiv:2105.01533</p>
+  <p style="margin-top:.2rem;font-size:.7rem">Histogramas e visualizações são representações educacionais · Empresas parceiras listadas com base em fontes públicas disponíveis</p>
+  <div class="researchers">
+    <span class="res-label">Pesquisadores</span>
+    <span class="res-item"><span class="res-role">Pesquisadora</span>Clarice Cleny</span>
+    <span class="res-sep">·</span>
+    <span class="res-item"><span class="res-role">Orientador</span>Prof. Sergio Vieira</span>
+  </div>
+</footer>
+
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Alternar modo claro/escuro">☀</button>
+<script src="examples.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>
